@@ -1,70 +1,11 @@
 body {
-	background-image: url("../Image/bg3.jpg");
-	background-repeat: repeat;
+    background-image: url("../Image/bg3.jpg");
+    background-repeat: repeat;
+}
+
+a {
+    text-decoration: none;
 }
 
 
-.topnav {
-  overflow: hidden;
-  background-color: #2e648d;
-}
-
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 15px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.topnav .icon {
-  display: none;
-}
-
-@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-.content {
-	background-color: #e0e6e6;
-	height: 500px;
-	margin-top: 10px;
-	padding-top: 40px;
-	padding-bottom: 40px;
-}
-
-.right {
-	border-left: 2px dashed #2e648d;
-	height: 450px;
-}
 
