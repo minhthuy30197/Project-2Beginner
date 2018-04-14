@@ -8,8 +8,8 @@
 	<link href="https://plus.google.com/100585555255542998765" rel="publisher">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/style1.css">
-	<link rel="stylesheet" href="css/style2.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style2.css">
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,31 +34,34 @@
 			</div>
 			
 			<div class="right col-md-9">
-				<p>Listening DEMO</p>
-				<div id="player-cont">
-					<div class="logo">
-						<img src="Image/player.png"></img>
-					</div>
-					<div class="player">
-						<div id="trackTitle" class="track-title">Title is here</div>
-						<input id="trackSlider" class="track-slider" type="range" min="0" step="1" onchange="seekTrack()" />
-						<div>
-							<div id="currentTime" class="current-time">00:00</div>
-							<div id="duration" class="duration">00:00</div>
+				<p><b>Listening DEMO<b></p>
+				<div id="playerCont" class="first-part">	
+					
+					<div id="trackTitle" class="track-title-fluid">Track Title</div>				
+					<input id="trackSlider" type="range" min="0" step="1" onchange="seekTrack()">
+					<div>
+						<div id="currentTime" class="display current-time">00:00</div>
+						<div id="duration" class="display duration">00:00</div>
+						<br />
+					</div>   <!-- Ket thuc div chua phan tren thanh player -->
+					
+					<div class="controllers">
+						<div class="first-part">
+							<img src="Image/previous.png" onClick="previous()" />
+							<img src="Image/backward.png" onClick="decreasePlaybackRate()" />
+							<img id="playButton" src="Image/play.png" onClick="playOrPause(this)" />
+							<img src="Image/forward.png" onClick="increasePlaybackRate() " />
+							<img src="Image/next.png" onClick="next()" />
 						</div>
-						<div class="controllers">
-							<img src="Image/previous.png" width="50px" onClick="previous()" />
-							<img src="Image/backward.png" width="50px" onClick="decreasePlaybackRate()" />
-							<img src="Image/pause.png" width="80px" onClick="playOrPause(this)" />
-							<img src="Image/forward.png" width="50px" onClick="increasePlaybackRate() " />
-							<img src="Image/next.png" width="50px" onClick="next()" />
-							<img src="Image/volume-down.png" width="20px" />
-							<input id="volumeSlider" class="volume-slider" type="range"
-									min="0" max="1" step="0.01"  onchange="adjustVolume()"  />
-							<img src="Image/volume-up.png" width="20px" />
+						
+						<div class="second-part">
+							<img id="volume1" src="Image/volume-down.png" />
+							<img id="volume2" src="Image/volume-up.png" />
+							<input id="volumeSlider" class="volume-slider" type="range" min="0" max="1" step="0.01" onchange="adjustVolume()"  />
 						</div>
-						<div id="nextTrackTitle" class="next-track">Next track: <b> The title is here ... </b></div>
 					</div>
+					
+					<div id="nextTrackTitle" class="next-track-title">Next track: <b> The title is here ... </b></div>
 				</div>
 				<script type="text/javascript" src="js/player.js"></script>
 			</div>

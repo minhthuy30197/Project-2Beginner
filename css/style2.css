@@ -1,0 +1,50 @@
+.track-title {
+	padding: 10px 10px;
+}
+
+#trackSlider {
+	margin: 10px 0 10px 0;
+}
+
+.display {
+	font-size: 20px;
+	margin-bottom: 15px;
+}
+
+.current-time {
+	float: left;
+}
+
+.duration {
+	float: right;
+}
+
+div.controllers img {
+	margin: 0 0 5px 5px;
+}
+
+div.first-part {
+	text-align: center;
+}
+
+div.first-part img {
+	width: 50px;
+}
+
+div.second-part {
+	float: right;
+}
+
+#volume1 {
+	width: 20px;
+	float: left;
+}
+
+#volume2 {
+	width: 20px;
+	float: right;
+}
+
+.next-track-title {
+	margin: 10px 10px 0 0;
+}
