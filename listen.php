@@ -37,21 +37,21 @@
 				<p><b>Listening DEMO<b></p>
 				<div id="playerCont" class="first-part">	
 					
-					<div id="trackTitle" class="track-title-fluid">Track Title</div>				
+					<div class="track-title-fluid"><label id="trackTitle">Track Title </label></div>				
 					<input id="trackSlider" type="range" min="0" step="1" onchange="seekTrack()">
 					<div>
-						<div id="currentTime" class="display current-time">00:00</div>
-						<div id="duration" class="display duration">00:00</div>
+						<div class="display current-time"><label id="currentTime">00:00</label></div>
+						<div class="display duration"><label id="duration">00:00</label></div>
 						<br />
 					</div>   <!-- Ket thuc div chua phan tren thanh player -->
 					
 					<div class="controllers">
 						<div class="first-part">
-							<img src="Image/previous.png" onClick="previous()" />
-							<img src="Image/backward.png" onClick="decreasePlaybackRate()" />
-							<img id="playButton" src="Image/play.png" onClick="playOrPause(this)" />
-							<img src="Image/forward.png" onClick="increasePlaybackRate() " />
-							<img src="Image/next.png" onClick="next()" />
+							<button type="button" id="preBtn" onClick="previous()" />
+							<button type="button" id="backwardBtn"  onClick="decreasePlaybackRate()" />
+							<button type="button" id="playBtn" onClick="playOrPause()" />
+							<button type="button" id="forwardBtn" onClick="increasePlaybackRate() " />
+							<button type="button" id="nextBtn" onClick="next()" />
 						</div>
 						
 						<div class="second-part">
@@ -63,12 +63,12 @@
 					
 					<div id="nextTrackTitle" class="next-track-title">Next track: <b> The title is here ... </b></div>
 				</div>
-				<script type="text/javascript" src="js/player.js"></script>
 			</div>
 		</div>
 		<div class="row">
 			<?php include "footer.php"; ?>
 		</div> 
 	</div>
+	<script type="text/javascript" src="js/player.js"></script>
 </body>
 </html>
