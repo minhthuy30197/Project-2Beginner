@@ -37,7 +37,7 @@
 				<p><b>Listening DEMO<b></p>
 				<div id="playerCont" class="first-part">	
 					
-					<div class="track-title-fluid"><label id="trackTitle">Track Title </label></div>				
+					<div class="track-title-fluid"><label id="trackTitle">Track Title </label></div>		
 					<input id="trackSlider" type="range" min="0" step="1" onchange="seekTrack()">
 					<div>
 						<div class="display current-time"><label id="currentTime">00:00</label></div>
@@ -47,11 +47,7 @@
 					
 					<div class="controllers">
 						<div class="first-part">
-							<button type="button" id="preBtn" onClick="previous()" />
-							<button type="button" id="backwardBtn"  onClick="decreasePlaybackRate()" />
-							<button type="button" id="playBtn" onClick="playOrPause()" />
-							<button type="button" id="forwardBtn" onClick="increasePlaybackRate() " />
-							<button type="button" id="nextBtn" onClick="next()" />
+							<button type="button" id="playBtn" onClick="playOrPause()"/>
 						</div>
 						
 						<div class="second-part">

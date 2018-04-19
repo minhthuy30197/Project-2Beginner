@@ -8,45 +8,44 @@ var currentTime = document.getElementById('currentTime');
 var duration = document.getElementById('duration');
 var volumeSlider = document.getElementById('volumeSlider');
 var nextTrackTitle = document.getElementById('nextTrackTitle');
-
-var preBtn = document.getElementById('preBtn');
-var playButton = document.getElementById('playBtn');
-var nextBtn = document.getElementById('nextBtn');
+var playBtn = document.getElementById('playBtn');
 
 var track = new Audio();
 var currentTrack = 0;			//gia tri cua currentTrack tuong ung voi thu tu trong mang, bat dau tu 0
 loadTrack();
-setInterval(updateTrackSlider(track), 1000);
+setInterval(updateTrackSlider, 1000);
 
 function loadTrack(){
 	track.src = "Audio/" + tracks[currentTrack];
+	track.addEventListener('loadedmetadata', showDuration);											//su dung event loadedmetadata de su dung duoc audio.duration
 	trackTitle.textContent = (currentTrack + 1) + " - " + tracks[currentTrack];						//dien noi dung cho trackTitle voi cu phap " [soTT] - [ten track]
 
 	nextTrackTitle.innerHTML = "<b>Next Track: </b>" + tracks[currentTrack + 1 % tracks.length];	//lay ten cua track tiep theo cho nextTrackTitle
 	track.volume = volumeSlider.value;																//gia tri cua volume lay tu 0.0 (silent) den 1.0 (max)
-	track.playbackRate = 1;					//thiet lap toc do chay cua audio - 1.0 la toc do binh thuong
-	showDuration(track);
+	track.playbackRate = 1;																		//thiet lap toc do chay cua audio - 1.0 la toc do binh thuong
 	
-	//vo hieu hoa nut previous neu la track dau tien;
-	//vo hieu hoa nut next neu la track cuoi cung
-	if (currentTrack == 0)
-		preBtn.disabled = true;
-	else if (currentTrack == tracks.length - 1)
-		nextBtn.disabled = true;
 }
 
-function updateTrackSlider(audio){
-	var time = Math.round(audio.currentTime);
+function updateTrackSlider(){
+	var time = Math.round(track.currentTime);
 	trackSlider.value = time;
 	currentTime.textContent = convertTime(time);
-	if (audio.ended)
+	if (track.ended)
 		next();
 }
 
+function next() {
+	currentTrack ++;
+	loadTrack();
+}
+
 //thiet lap gia tri max cho trackSlider va thay doi noi dung cua duration
-function showDuration (audio) {
-	var length = Math.floor(audio.duration);
-	trackSlider.setAttribute("max", length);
+function showDuration() {
+	//lam tron do dai cua audio den giay
+	//roi set lai gia tri max cua trackSlider va thay doi nhan
+	
+	var length = Math.floor(track.duration);
+	trackSlider.setAttribute("max", length.toString());
 	duration.textContent = convertTime(length);
 }
 
@@ -59,23 +58,18 @@ function convertTime (seconds) {
 }
 
 function playOrPause() {
+
 	if(track.paused){
-		track.play();
+		track.play();	
+		playBtn.style.background = "url('Image/pause.png')";
+		playBtn.style.backgroundSize = "contain";
 	}
 	else
 	{
 		track.pause();
+		playBtn.style.background = "url('Image/play.png')";
+		playBtn.style.backgroundSize = "contain";
 	}
-}
-
-function next() {
-	currentTrack ++;
-	loadTrack();
-}
-
-function previous () {
-	currentTrack --;
-	loadTrack();
 }
 
 function seekTrack () {
@@ -85,12 +79,4 @@ function seekTrack () {
 
 function adjustVolume () {
 	track.volume = volumeSlider.value;
-}
-
-function increasePlaybackRate () {
-	tracks.playbackRate += 0.5;
-}
-
-function decreasePlaybackRate () {
-	tracks.playbackRate -= 0.5;
 }

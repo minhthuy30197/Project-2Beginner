@@ -4,6 +4,7 @@
 
 #trackSlider {
 	margin: 10px 0 10px 0;
+	width: 750px;
 }
 
 .display {
@@ -19,17 +20,21 @@
 	float: right;
 }
 
-div.first-part {
+.first-part {
 	text-align: center;
 }
 
-div.second-part {
-	float: right;
+#playBtn {
+	margin: 0 10px 10px 10px;
+	width: 70px;
+	height: 70px;
+	background: url('../Image/play.png');
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 
-div.first-part button {
-	font-size: 50px;
-	margin: 0 10px 10px 10px;
+.second-part {
+	float: right;
 }
 
 #volume1 {
@@ -43,5 +48,6 @@ div.first-part button {
 }
 
 .next-track-title {
+	float: left;
 	margin: 10px 10px 0 0;
 }
