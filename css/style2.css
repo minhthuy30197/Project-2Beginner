@@ -32,10 +32,6 @@ div.first-part button {
 	margin: 0 10px 10px 10px;
 }
 
-#preBtn {
-	background-image: url("Img/previous.png");
-}
-
 #volume1 {
 	width: 20px;
 	float: left;
