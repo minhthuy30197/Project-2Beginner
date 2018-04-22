@@ -21,8 +21,8 @@ function loadTrack(){
 	trackTitle.textContent = (currentTrack + 1) + " - " + tracks[currentTrack];						//dien noi dung cho trackTitle voi cu phap " [soTT] - [ten track]
 
 	nextTrackTitle.innerHTML = "<b>Next Track: </b>" + tracks[currentTrack + 1 % tracks.length];	//lay ten cua track tiep theo cho nextTrackTitle
-	track.volume = volumeSlider.value;																//gia tri cua volume lay tu 0.0 (silent) den 1.0 (max)
-	track.playbackRate = 1;																		//thiet lap toc do chay cua audio - 1.0 la toc do binh thuong
+	adjustVolume();
+	track.playbackRate = 1;			//thiet lap toc do chay cua audio - 1.0 la toc do binh thuong
 	
 }
 
