@@ -1,6 +1,3 @@
-//cac gia tri trong tracks la ten cac file trong Audio
-var tracks = ["DeMaiCoNhau-MaiTron.mp3", "Diep Khuc Mua Xuan - Vy Oanh.mp3",
-			  "Nhung Dieu Nho Nhoi - Vy Oanh.mp3", "Thinking Of You - ATC.mp3"];
 
 var trackTitle = document.getElementById('trackTitle');
 var trackSlider = document.getElementById('trackSlider');
@@ -11,18 +8,17 @@ var nextTrackTitle = document.getElementById('nextTrackTitle');
 var playBtn = document.getElementById('playBtn');
 
 var track = new Audio();
-var currentTrack = 0;			//gia tri cua currentTrack tuong ung voi thu tu trong mang, bat dau tu 0
 loadTrack();
 setInterval(updateTrackSlider, 1000);
 
 function loadTrack(){
-	track.src = "Audio/" + tracks[currentTrack];
+	track.src = "Audio/Level" + level + "/" + fileName;
 	track.addEventListener('loadedmetadata', showDuration);											//su dung event loadedmetadata de su dung duoc audio.duration
-	trackTitle.textContent = (currentTrack + 1) + " - " + tracks[currentTrack];						//dien noi dung cho trackTitle voi cu phap " [soTT] - [ten track]
+	trackTitle.textContent = fileName;
 
-	nextTrackTitle.innerHTML = "<b>Next Track: </b>" + tracks[currentTrack + 1 % tracks.length];	//lay ten cua track tiep theo cho nextTrackTitle
-	adjustVolume();
-	track.playbackRate = 1;			//thiet lap toc do chay cua audio - 1.0 la toc do binh thuong
+	//nextTrackTitle.innerHTML = "<b>Next Track: </b>" + tracks[currentTrack + 1 % tracks.length];	//lay ten cua track tiep theo cho nextTrackTitle
+	track.volume = volumeSlider.value;																//gia tri cua volume lay tu 0.0 (silent) den 1.0 (max)
+	track.playbackRate = 1;																		//thiet lap toc do chay cua audio - 1.0 la toc do binh thuong
 	
 }
 
@@ -30,14 +26,15 @@ function updateTrackSlider(){
 	var time = Math.round(track.currentTime);
 	trackSlider.value = time;
 	currentTime.textContent = convertTime(time);
-	if (track.ended)
-		next();
+	//if (track.ended)
+	//	next();
 }
 
+/*
 function next() {
 	currentTrack ++;
 	loadTrack();
-}
+} */
 
 //thiet lap gia tri max cho trackSlider va thay doi noi dung cua duration
 function showDuration() {

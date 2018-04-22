@@ -1,0 +1,53 @@
+.track-title {
+	padding: 10px 10px;
+}
+
+#trackSlider {
+	margin: 10px 0 10px 0;
+	width: 750px;
+}
+
+.display {
+	font-size: 20px;
+	margin-bottom: 15px;
+}
+
+.current-time {
+	float: left;
+}
+
+.duration {
+	float: right;
+}
+
+.first-part {
+	text-align: center;
+}
+
+#playBtn {
+	margin: 0 10px 10px 10px;
+	width: 70px;
+	height: 70px;
+	background: url('../Image/play.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.second-part {
+	float: right;
+}
+
+#volume1 {
+	width: 20px;
+	float: left;
+}
+
+#volume2 {
+	width: 20px;
+	float: right;
+}
+
+.next-track-title {
+	float: left;
+	margin: 10px 10px 0 0;
+}
