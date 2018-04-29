@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<?php
-	$level = "1";
-	$fileName = "Test.mp3";
-	$transcript = "Audio/Level1/" . "Test.txt";
-?>
+
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -46,7 +42,10 @@
 				<div class="exercise">
 					<p class="guide">Let fill the blanks:</p><br />
 					<div class="fillBlanks">
-						<p class="transcript">The transcript</p>
+						<p id="paragraph" class="transcript" readonly="readonly"></p>
+					</div>
+					<div class="wrapper">
+						<button type="button" class="submitBtn" onclick="checkWords()"> Submit</button>
 					</div>
 				</div>
 			</div>
@@ -55,11 +54,27 @@
 			<?php include "footer.php"; ?>
 		</div> 
 	</div>
+		<?php
+		$level = "1";
+		$fileName = "Test.mp3";
+		$transcriptPath = "Audio/Level" . $level . "/" . substr($fileName, 0, strlen($fileName) - 3) . "txt";
+		$transcript = "";
+		
+		if ($file = fopen($transcriptPath, "r"))
+		{	
+			$transcript .= fread($file, filesize($transcriptPath));
+			fclose($file);
+		}
+	?>
+	
 	<script type="text/javascript"> 
 		var level = "<?php echo $level ?>";
 		var fileName = "<?php echo $fileName ?>";
 		var transcript = "<?php echo $transcript ?>";
 	</script>
+
 	<script type="text/javascript" src="js/player.js"></script>
+	<script type="text/javascript" src="js/listenMode1.js"></script>
+
 </body>
 </html>
