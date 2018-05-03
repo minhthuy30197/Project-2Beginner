@@ -1,6 +1,19 @@
 var mylevel = 1;
 var mabai = 4;
 
+function saveWord(word) {
+    console.log(word);
+    $.ajax({
+        url: 'saveword.php',
+        dataType: "json",
+        data: {"word": word},
+        type: 'post',
+        success: function (output) {
+            alert(output);
+        }
+    });
+
+}
 function findWord(word) {
     var newword = word.toLowerCase().trim();
     var url = "http://api.wordnik.com:80/v4/word.json/"+newword+"/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
@@ -9,7 +22,6 @@ function findWord(word) {
         url: url,
         type: 'get',
         success: function (output) {
-            console.log(output.length);
             if (output.length != 0) {
                 var tmp = "";
                 var mean = "";

@@ -137,7 +137,7 @@
                 <p id="meaning"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="saveWord">Save as my words</button>
+                <button type="button" class="btn btn-primary" id="saveWord" onclick="saveWord($('#word').text())">Save as my words</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
