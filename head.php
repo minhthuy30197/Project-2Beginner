@@ -83,8 +83,8 @@
     <div class="collapse navbar-collapse navbar-default" id="myNavbar">
         <ul class="nav navbar-nav navbar-left">
             <li><a href="#">Listening</a></li>
-            <li><a href="#">Reading</a></li>
-            <li><a href="#">Vocabulary</a></li>
+            <li><a href="#">Speaking</a></li>
+            <li><a href="mywords.php">Vocabulary</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
