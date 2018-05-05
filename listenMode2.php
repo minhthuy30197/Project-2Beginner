@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -8,8 +9,9 @@
 	<link href="https://plus.google.com/100585555255542998765" rel="publisher">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/style1.css">
+	<link rel="stylesheet" href="css/stylePlayer.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style2.css">
+	<link rel="stylesheet" href="css/styleListenMode2.css">
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,30 +36,17 @@
 			</div>
 			
 			<div class="right col-md-9">
-				<p><b>Listening DEMO<b></p>
-				<div id="playerCont" class="first-part">	
-					
-					<div class="track-title-fluid"><label id="trackTitle">Track Title </label></div>		
-					<input id="trackSlider" type="range" min="0" step="1" onchange="seekTrack()">
-					<div>
-						<div class="display current-time"><label id="currentTime">00:00</label></div>
-						<div class="display duration"><label id="duration">00:00</label></div>
-						<br />
-					</div>   <!-- Ket thuc div chua phan tren thanh player -->
-					
-					<div class="controllers">
-						<div class="first-part">
-							<button type="button" id="playBtn" onClick="playOrPause()"/>
-						</div>
-						
-						<div class="second-part">
-							<img id="volume1" src="Image/volume-down.png" />
-							<img id="volume2" src="Image/volume-up.png" />
-							<input id="volumeSlider" class="volume-slider" type="range" min="0" max="1" step="0.01" onchange="adjustVolume()"  />
-						</div>
+				<?php include "player.php"; ?>
+				
+				<br /><br />
+				<div class="exercise">
+					<p class="guide">Write the setences you hear:</p>
+					<div class="write-sentences">
+						<textarea id="textarea" cols="100" rows="3" class="sentences-input"></textarea>
 					</div>
-					
-					<div id="nextTrackTitle" class="next-track-title">Next track: <b> The title is here ... </b></div>
+					<div class="wrapper">
+						<button type="button" class="submitBtn" onclick="checkSentences()"> Submit</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -65,6 +54,27 @@
 			<?php include "footer.php"; ?>
 		</div> 
 	</div>
+	
+	<?php
+		$level = "1";
+		$fileName = "Test1.mp3";
+		$transcriptPath = "Audio/Level" . $level . "/" . substr($fileName, 0, strlen($fileName) - 3) . "txt";
+		$transcript = "";
+		
+		if ($file = fopen($transcriptPath, "r"))
+		{	
+			$transcript .= fread($file, filesize($transcriptPath));
+			fclose($file);
+		}
+	?>
+	
+	<script type="text/javascript">
+		var level = "<?php echo $level ?>";
+		var fileName = `<?php echo $fileName ?>`;
+		var transcript = `<?php echo $transcript ?>`;
+	</script>
+
 	<script type="text/javascript" src="js/player.js"></script>
+	<script type="text/javascript" src="js/listenMode2.js"></script>
 </body>
 </html>

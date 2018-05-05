@@ -44,6 +44,9 @@
 					<div class="fillBlanks">
 						<p id="paragraph" class="transcript" readonly="readonly"></p>
 					</div>
+					<div class="wrapper">
+						<button type="button" class="submitBtn" onclick="checkWords()"> Submit</button>
+					</div>
 				</div>
 			</div>
 		</div>

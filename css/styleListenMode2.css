@@ -1,0 +1,11 @@
+
+.guide {
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: underline;
+}
+
+.wrapper {
+	margin-top: 5px;
+	text-align: center;
+}
