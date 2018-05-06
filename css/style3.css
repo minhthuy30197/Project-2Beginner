@@ -339,7 +339,7 @@ footer {
 
 #contact input {height: 55px;}
 
-#contact input[type='submit'] {
+#contact input[id='submit'] {
     background: #242424;
     border: none;
     color: #ffffff;
@@ -350,7 +350,7 @@ footer {
     margin-top: 10px;
 }
 
-#contact input[type='submit']:hover {
+#contact input[id='submit']:hover {
     background: #00b5a9;
 }
 

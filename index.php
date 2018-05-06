@@ -14,6 +14,7 @@
     <link href='https://fonts.googleapis.com/css?family=Rajdhani:400,500,700' rel='stylesheet' type='text/css'>
     <script src="js/jquery.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/md5.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/vegas.min.js"></script>
     <script src="js/wow.min.js"></script>
@@ -130,17 +131,20 @@
                     <p class="wow fadeInUp" data-wow-delay="0.6s">To get our lessons, please create a account. It's free. Let us help you improve your English.</p>
                 </div>
                 <div class="contact-form wow fadeInUp" data-wow-delay="1.0s">
-                    <form id="contact-form" method="post" action="#">
-                        <div class="col-md-6 col-sm-6">
-                            <input name="name" type="text" class="form-control" placeholder="Your Name" required>
+                    <div id="contact-form">
+                        <div class="col-sm-12">
+                            <input id="name" type="text" class="form-control" placeholder="Your Name">
                         </div>
                         <div class="col-md-6 col-sm-6">
-                            <input name="email" type="email" class="form-control" placeholder="Your Email" required>
+                            <input type="text" id="email" class="form-control" placeholder="Your Email">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <input id="password" type="password" class="form-control" placeholder="Your Password">
                         </div>
                         <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
-                            <input name="submit" type="submit" class="form-control submit" id="submit" value="SEND INFO">
+                            <input type="button" class="form-control submit text-center" id="submit" value="SEND INFO" onclick="regis()">
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
 
@@ -174,7 +178,7 @@
                 <h2>Contact</h2>
                 <p class="wow fadeInUp" data-wow-delay="0.6s">
                     Contact us for support<br>
-                    Email: abc@gmail.com<br>
+                    Email: 2beginnervn@gmail.com<br>
                     Ha Noi University of Science and Technology
                 </p>
             </div>
@@ -193,7 +197,7 @@
             </div>
             <form action="#" method="post">
                 <input name="email1" type="text" class="form-control" id="email1" placeholder="Email">
-                <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                <input name="password1" type="password1" class="form-control" id="password1" placeholder="Password">
                 <input name="login" type="submit" class="form-control" id="login" value="Log in">
             </form>
             <p>Don't have an account? <a onclick = "sign()">Sign Up</a></p>
