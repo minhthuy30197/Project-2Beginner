@@ -11,8 +11,8 @@ if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password"])
         $sql = "select MaNH from nguoihoc where Email = '" . $_POST["email"] . "'";
         $rs1 = $mysqli->query($sql);
         $row = $rs1->fetch_row();
-        $hash = urlencode('confirm.php?manh='.$row[0]);
-        $link = 'http://localhost:81/tienganh/'.$hash;
+        $hash = urlencode('manh='.$row[0]);
+        $link = 'http://localhost:81/tienganh/confirm.php?'.$hash;
         require 'PHPMailer/PHPMailer/src/PHPMailer.php';
         require 'PHPMailer/PHPMailer/src/SMTP.php';
         require 'PHPMailer/PHPMailer/src/Exception.php';
@@ -40,7 +40,7 @@ if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password"])
                 )
             );
             if (!$mail->send()) {
-                $sql = "delete dangnhap where Username = '".$_POST["email"]."'";
+                $sql = "delete from dangnhap where Username = '".$_POST["email"]."'";
                 $rs = $mysqli->query($sql);
                 $result = "We can't send mail for you. Please try register again!";
                 exit();
@@ -48,12 +48,12 @@ if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password"])
                 $result = "success";
             }
         } catch (Exception $e) {
-            $sql = "delete dangnhap where Username = '".$_POST["email"]."'";
+            $sql = "delete from dangnhap where Username = '".$_POST["email"]."'";
             $rs = $mysqli->query($sql);
             $result = "We can't send mail for you. Please try register again!";
         }
     } else {
-        $sql = "delete dangnhap where Username = '".$_POST["email"]."'";
+        $sql = "delete from dangnhap where Username = '".$_POST["email"]."'";
         $rs = $mysqli->query($sql);
         $result = "Can't create your account. Please try again!";
     }

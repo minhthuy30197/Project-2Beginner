@@ -1,5 +1,6 @@
 var mylevel = 1;
 var mabai = 4;
+var doing = 1;
 
 function saveWord(word) {
     console.log(word);
@@ -112,7 +113,7 @@ function getListLevels() {
             console.log(output.type);
             var arr = output.levels;
             var count = output.count;
-            var doing = output.levelspeak;
+            doing = output.levelspeak;
             for (i = 1; i <= count; i++) {
                 if (i == doing)
                     $('#list-level').append('<a href="speak.php?level=' + i + '" class="list-group-item list-group-item-action">\n' +
