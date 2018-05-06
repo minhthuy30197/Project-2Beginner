@@ -167,8 +167,8 @@
                     <p>A project of team 3. Team members:</p>
                     <p>Trinh Minh Thuy - 20156568</p>
                     <p>Nguyen Thi Ngoc Huyen - 20156292</p>
-                    <p>Vu Hong Thang - 20155669</p>
-                    <p>Le Thi Hong - 20156510</p>
+                    <p>Le Thi Hong - 20155669</p>
+                    <p>Vu Hong Thang - 20156510</p>
                 </div>
             </div>
 
