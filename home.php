@@ -21,7 +21,6 @@ if (!isset($_SESSION["MaNH"])) {
     <link rel="stylesheet" href="css/style4.css">
     <script src="js/line-db-php.js"></script>
     <link href="css/default.css" rel="stylesheet">
-
 </head>
 <body>
 <?php include "head.php" ?>

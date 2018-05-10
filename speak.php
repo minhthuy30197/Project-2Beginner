@@ -98,10 +98,10 @@ if (!isset($_SESSION["MaNH"])) {
                                 <span class="final" id="final_span"></span>
                                 <span class="interim" id="interim_span"></span>
                             </div>
+                            <br>
                             <button name="checkspeak" class="btn btn-primary" onclick="check()">Check</button>
                         </div>
                         <div id="announce">
-
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 var mylevel = 1;
-var mabai = 4;
+var mabai = 1;
 var doing = 1;
 
 function saveWord(word) {
@@ -48,81 +48,28 @@ function findWord(word) {
     });
 }
 
-function start_listen(content) {
-    var msg = new SpeechSynthesisUtterance();
-    var voices = speechSynthesis.getVoices();
-    msg.voice = voices[1]; // giọng người đọc
-    msg.voiceURI = 'native';
-    msg.volume = 1; // 0 đến 1
-    msg.rate = 1; // 0.1 đến 10
-    msg.pitch = 2; // 0 đến 2
-    msg.text = content;
-    msg.lang = 'en-US'
-    speechSynthesis.speak(msg);
-}
-
-function check() {
-    var s1 = $("#final_span").text().toLowerCase()
-    var s2 = $("#nd").text().toLowerCase()
-    s2 = s2.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, "")
-    s2 = s2.replace(/\s{2,}/g, ' ');
-    console.log(s1)
-    console.log(s2)
-    $.ajax({
-        url: "checkspeak.php",
-        dataType: "json",
-        data: {"action": "check", "s1": s1, "s2": s2, "level": mylevel, "mabai": mabai},
-        type: 'post',
-        success: function (output) {
-            console.log(output);
-            if (output.done) {
-                $('.modal-confirm .btn').css('background', '#82ce34');
-                $('.modal-confirm .icon-box').css('background', '#82ce34');
-                $('.material-icons').html('&#xE876;');
-                $('.modal-title').html('Awesome!');
-                $('#modal-btn').text('Go to next level');
-                $('#modal-mark').html(output.percent + "/100");
-                $('#modal-btn').attr("href", "speak.php?level=" + output.next);
-                $('#modal-msg').html('Congratulations! You have finished level ' + mylevel + '.');
-                //show button next + change tag in list-group if modal is closed
-            }
-            else {
-                $('.modal-confirm .btn').css('background', '#ef513a');
-                $('.modal-confirm .icon-box').css('background', '#ef513a');
-                $('.material-icons').html('&#xE5CD;');
-                $('.modal-title').html('Sorry!');
-                $('#modal-msg').html('Please go back and do again. Try your best.');
-                $('#modal-btn').text('OK');
-                $('#modal-mark').html(output.percent + "/100");
-                $('#modal-btn').attr("href", "speak.php?level=" + output.next);
-                //clear input
-            }
-            $('#myModal').modal('show');
-        }
-    });
-}
-
 function getListLevels() {
+    console.log("hi")
     var level = getUrlParameter('level');
     $.ajax({
-        url: "inispeak.php",
+        url: "inilisten.php",
         dataType: "json",
         data: {action: "getlist", level: level},
         type: 'post',
         success: function (output) {
-            console.log(output.type);
+            console.log(output);
             var arr = output.levels;
             var count = output.count;
-            doing = output.levelspeak;
+            doing = output.levellisten;
             for (i = 1; i <= count; i++) {
                 if (i == doing)
-                    $('#list-level').append('<a href="speak.php?level=' + i + '" class="list-group-item list-group-item-action">\n' +
+                    $('#list-level').append('<a href="chooseLesson.php?level=' + i + '" class="list-group-item list-group-item-action">\n' +
                         '                            Level ' + i + '\n' +
                         '                            <span class="label label-primary pull-right">Doing</span>\n' +
                         '                        </a>');
-                else if (arr[i] == "false") $('#list-level').append('<a href="speak.php?level=' + i + '" class="list-group-item list-group-item-action disabled">Level ' + i + '</a>');
+                else if (arr[i] == "F") $('#list-level').append('<a href="chooseLesson.php?level=' + i + '" class="list-group-item list-group-item-action disabled">Level ' + i + '</a>');
                 else
-                    $('#list-level').append('<a href="speak.php?level=' + i + '" class="list-group-item list-group-item-action">\n' +
+                    $('#list-level').append('<a href="chooseLesson.php?level=' + i + '" class="list-group-item list-group-item-action">\n' +
                         '                            Level ' + i + '\n' +
                         '                            <span class="label pull-right"><img src="Image/checked.png" class="img-responsive"></span>\n' +
                         '                        </a>');
@@ -147,7 +94,7 @@ function getContent1() {
 
 function getContent2(level) {
     $.ajax({
-        url: "inispeak.php",
+        url: "inilisten.php",
         dataType: "json",
         data: {action: "getcontenttype2", level: level},
         type: 'post',
@@ -166,7 +113,7 @@ function getContent2(level) {
 
 function getContent3(level) {
     $.ajax({
-        url: "inispeak.php",
+        url: "inilisten.php",
         dataType: "json",
         data: {action: "getcontenttype3", level: level},
         type: 'post',
@@ -192,7 +139,7 @@ function getContent3(level) {
 
 function getContent4(level) {
     $.ajax({
-        url: "inispeak.php",
+        url: "inilisten.php",
         dataType: "json",
         data: {action: "getcontenttype4", level: level},
         type: 'post',
@@ -219,10 +166,4 @@ var getUrlParameter = function getUrlParameter(sParam) {
             return sParameterName[1] === undefined ? true : sParameterName[1];
         }
     }
-}
-
-function redo() {
-    $('#ktra').show();
-    $('#announce').hide();
-    $('#redo').hide();
 }

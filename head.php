@@ -91,7 +91,7 @@ if (!isset($_SESSION["Username"])) {
         <ul class="nav navbar-nav navbar-left">
             <?php
                 if (isset($_SESSION["MaNH"]))
-                    echo '<li><a href="#">Listening</a></li>
+                    echo '<li><a href="chooseLevelListen.php">Listening</a></li>
                     <li><a href="start_speaking.php">Speaking</a></li>
                     <li><a href="mywords.php">Vocabulary</a></li>
                     <li><a href="home.php">MyHome</a></li>';
@@ -103,8 +103,7 @@ if (!isset($_SESSION["Username"])) {
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out" title="Log out"></span></a></li>
         </ul>
     </div>
 </nav>
