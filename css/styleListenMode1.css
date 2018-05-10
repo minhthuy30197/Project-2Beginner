@@ -22,3 +22,7 @@
 	margin-top: 20px;
 	text-align: center;
 }
+
+#listenResult {
+	visibility: hidden;
+}

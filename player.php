@@ -20,6 +20,4 @@
 			<input id="volumeSlider" class="volume-slider" type="range" min="0" max="1" step="0.01" onchange="adjustVolume()"  />
 		</div>
 	</div>
-					
-	<div id="nextTrackTitle" class="next-track-title">Next track: <b> The title is here ... </b></div>
 </div>	

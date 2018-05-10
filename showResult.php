@@ -1,5 +1,20 @@
 <!DOCTYPE html>
-
+<?php
+$totalWords;
+$listenResult;
+ 
+if (isset($_POST['total-words'])) {
+	$totalWords = $_POST['total-words'];
+} else {
+	$totalWords = 0;
+}
+ 
+if (isset($_POST['listen-result'])) {
+	$listenResult = $_POST['listen-result'];
+} else {
+	$listenResult = 0;
+}
+?>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -11,7 +26,7 @@
 	<link rel="stylesheet" href="css/style1.css">
 	<link rel="stylesheet" href="css/stylePlayer.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/styleListenMode2.css">
+	<link rel="stylesheet" href="css/styleListenMode1.css">
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,25 +47,27 @@
 		</div>
 		<div class="row content">
 			<div class="left col-md-3">
-				<!-- Lo trinh hoc -->
+				 <div class="panel panel-default">
+                <div class="panel-heading">List listening levels</div>
+                <div class="panel-body">
+                    <div class="list-group list-group-flush" id="list-level">
+
+                    </div>
+                </div>
+            </div>
 			</div>
 			
 			<div class="right col-md-9">
-				<?php include "player.php"; ?>
-				
-				<br /><br />
 				<div class="exercise">
-					<form action="showResult.php" method="post" onsubmit="checkSentences()">
-						<p class="guide">Write the setences you hear:</p>
-						<div class="write-sentences">
-							<textarea id="textarea" cols="100" rows="3" class="sentences-input"></textarea>
+					<form action="" method="post" >
+						<div class="div-intro">
+							<p >Your result: </p>
 						</div>
-						<div class="wrapper">
-							<input type="submit" class="submitBtn" value="Submit" />
+						<div class="div-result">
+							<p id="totalWord">Total words: <?php echo $totalWords ?> </p>
+							<p id="right-answer">Right answer: <?php echo $listenResult ?></p>
+							<p id="calculate-point">Your point: </p>
 						</div>
-						
-						<input id="totalWords" name="total-words" type="text" value="" />
-						<input id="listenResult" name="listen-result" type="text" value="" />	
 					</form>
 				</div>
 			</div>
@@ -59,25 +76,6 @@
 			<?php include "footer.php"; ?>
 		</div> 
 	</div>
-	
-	<?php
-		$audioPath = $_POST['choose-lesson'];
-		$transcriptPath = substr($audioPath, 0, strlen($audioPath) - 3) . "txt";
-		$transcript = "";
-		
-		if ($file = fopen($transcriptPath, "r"))
-		{	
-			$transcript .= fread($file, filesize($transcriptPath));
-			fclose($file);
-		}
-	?>
-	
-	<script type="text/javascript"> 
-		var audioPath = "<?php echo $audioPath ?>";
-		var transcript = "<?php echo $transcript ?>";
-	</script>
 
-	<script type="text/javascript" src="js/player.js"></script>
-	<script type="text/javascript" src="js/listenMode2.js"></script>
 </body>
 </html>

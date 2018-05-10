@@ -1,3 +1,4 @@
+//su dung cac bien lay tu ben ngoai: audioPath - duong dan den audio
 
 var trackTitle = document.getElementById('trackTitle');
 var trackSlider = document.getElementById('trackSlider');
@@ -12,13 +13,13 @@ loadTrack();
 setInterval(updateTrackSlider, 1000);
 
 function loadTrack(){
-	track.src = "Audio/Level" + level + "/" + fileName;
+	track.src = audioPath;
 	track.addEventListener('loadedmetadata', showDuration);											//su dung event loadedmetadata de su dung duoc audio.duration
-	trackTitle.textContent = fileName;
+	trackTitle.textContent = audioPath.substr(13, audioPath.length);								//loai bo phan "Audio/LevelX/"
 
 	//nextTrackTitle.innerHTML = "<b>Next Track: </b>" + tracks[currentTrack + 1 % tracks.length];	//lay ten cua track tiep theo cho nextTrackTitle
 	track.volume = volumeSlider.value;																//gia tri cua volume lay tu 0.0 (silent) den 1.0 (max)
-	track.playbackRate = 1;																		//thiet lap toc do chay cua audio - 1.0 la toc do binh thuong
+	track.playbackRate = 1;																			//thiet lap toc do chay cua audio - 1.0 la toc do binh thuong
 	
 }
 
