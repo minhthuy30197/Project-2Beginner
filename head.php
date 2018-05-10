@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION["MaNH"])) {
+if (!isset($_SESSION["Username"])) {
     header("Location: index.php");
     exit();
 }
@@ -89,10 +89,18 @@ if (!isset($_SESSION["MaNH"])) {
     </div>
     <div class="collapse navbar-collapse navbar-default" id="myNavbar">
         <ul class="nav navbar-nav navbar-left">
-            <li><a href="#">Listening</a></li>
-            <li><a href="start_speaking.php">Speaking</a></li>
-            <li><a href="mywords.php">Vocabulary</a></li>
-            <li><a href="home.php">MyHome</a></li>
+            <?php
+                if (isset($_SESSION["MaNH"]))
+                    echo '<li><a href="#">Listening</a></li>
+                    <li><a href="start_speaking.php">Speaking</a></li>
+                    <li><a href="mywords.php">Vocabulary</a></li>
+                    <li><a href="home.php">MyHome</a></li>';
+                if (isset($_SESSION["Admin"]))
+                    echo '<li><a href="#">Manage_Speaking_Levels</a></li>
+                    <li><a href="#">Manage_Listening_Levels</a></li>
+                    <li><a href="Admin.php">MyInfo</a></li>';
+            ?>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="logout.php"><span class="glyphicon glyphicon-log-out" title="Log out"></span></a></li>

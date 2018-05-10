@@ -114,7 +114,9 @@ function log_in() {
                 type: 'post',
                 success: function (output) {
                     if (output.msg == "success") {
-                        if (output.quyen == 1) console.log("admin");
+                        if (output.quyen == 1) {
+                            window.location = "Admin.php";
+                        }
                         else if (output.quyen == 2) {
                             window.location = "home.php";
                         }
@@ -141,7 +143,7 @@ function clickbegin() {
             else {
                 if (output == "nh") window.location = "home.php";
                 else {
-                    if (output == "admim") console.log("admin");
+                    if (output == "admin") window.location = "Admin.php";
                 }
             }
         }
