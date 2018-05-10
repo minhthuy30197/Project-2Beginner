@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password"])) {
     $sql = "insert into dangnhap (Username, Password, quyen) values ('".$_POST["email"]."','".$_POST["password"]."',2)";$rs = $mysqli->query($sql);
     $rs = $mysqli->query($sql);
-    $sql = "insert into nguoihoc (HoTen,Email,DangXuatCuoi,levelspeak,kichhoat) values ('" . $_POST["name"] . "','" . $_POST["email"] . "',null,1,0)";
+    $sql = "insert into nguoihoc (HoTen,Email,DangXuatCuoi,levelspeak,levellisten,kichhoat) values ('" . $_POST["name"] . "','" . $_POST["email"] . "',null,1,1,0)";
     $rs = $mysqli->query($sql);
     if ($rs) {
         $sql = "select MaNH from nguoihoc where Email = '" . $_POST["email"] . "'";

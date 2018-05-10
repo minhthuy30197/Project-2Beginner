@@ -10,8 +10,25 @@ if ($manh == '') {
 }
 else {
     require 'db_config.php';
-    $sql = "update nguoihoc set kichhoat = 1 where MaNH = ".$manh;
+    $sql = "select kichhoat from nguoihoc where MaNH = ".$manh;
     $rs = $mysqli->query($sql);
+    $rows = $rs->num_rows;
+    if ($rows == 0) {
+        header('Location: index.php');
+        exit();
+    }
+    else {
+        $row = $rs->fetch_row();
+        if ($row[0] == 1) {
+            header('Location: home.php');
+            exit();
+        }
+        else {
+            echo "hi";
+            $sql = "update nguoihoc set kichhoat = 1 where MaNH = ".$manh;
+            $rs = $mysqli->query($sql);
+        }
+    }
 }
 ?>
 <!DOCTYPE html>

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["MaNH"])) {
+    header("Location: index.php");
+    exit();
+}
+?>
 <style>
 
     .navbar-default {
@@ -85,10 +92,10 @@
             <li><a href="#">Listening</a></li>
             <li><a href="start_speaking.php">Speaking</a></li>
             <li><a href="mywords.php">Vocabulary</a></li>
+            <li><a href="home.php">MyHome</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out" title="Log out"></span></a></li>
         </ul>
     </div>
 </nav>

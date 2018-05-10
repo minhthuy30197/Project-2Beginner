@@ -5,8 +5,6 @@
     <title>2Beginner</title>
     <link href="Image/hi.png" rel="icon" type="image/ico">
     <!-- Bootstrap CSS + jQuery library -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/vegas.min.css">
@@ -33,7 +31,7 @@
                     <h1 class="wow fadeInUp" data-wow-delay="0.4s">Hello, we are 2Beginner</h1>
                     <h3 class="wow fadeInUp" data-wow-delay="0.6s">We are almost <strong>ready to help</strong> you <strong>improve your English</strong> skills!</h3>
                     <a href="" id="goabout" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="0.8s">About us</a>
-                    <a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-lg btn-success smoothScroll wow fadeInUp" data-wow-delay="1.0s">Let's begin</a>
+                    <a onclick="clickbegin()" class="btn btn-lg btn-success smoothScroll wow fadeInUp" data-wow-delay="1.0s">Let's begin</a>
                 </div>
             </div>
 
@@ -113,7 +111,7 @@
             </div>
 
             <div class="clearfix text-center col-md-12 col-sm-12">
-                <a href="#contact" class="btn btn-default smoothScroll">Try learning</a>
+                <a href="" class="btn btn-default smoothScroll">What we have</a>
             </div>
 
         </div>
@@ -195,10 +193,10 @@
                 <button type="button" class="close" id="close1" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h2 class="modal-title">Welcome to 2Beginner</h2>
             </div>
-            <form action="#" method="post">
-                <input name="email1" type="text" class="form-control" id="email1" placeholder="Email">
-                <input name="password1" type="password1" class="form-control" id="password1" placeholder="Password">
-                <input name="login" type="submit" class="form-control" id="login" value="Log in">
+            <form>
+                <input type="text" class="form-control" id="email1" placeholder="Email">
+                <input type="password" class="form-control" id="password1" placeholder="Password">
+                <input type="button" class="form-control" id="login" value="Log in" onclick="log_in()">
             </form>
             <p>Don't have an account? <a onclick = "sign()">Sign Up</a></p>
             <p>or <a onclick="openreset()">Reset password</a></p>
@@ -211,3 +209,4 @@
 
 </body>
 </html>
+

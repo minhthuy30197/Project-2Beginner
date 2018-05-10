@@ -450,13 +450,13 @@ footer a:hover {
 .modal-dialog a {
     color: white;
 }
-.modal-dialog form input[type="submit"] {
+.modal-dialog form input[id="login"] {
     background: #ffffff;
     color: #242424;
     text-transform: uppercase;
     margin-top: 30px;
 }
-.modal-dialog form input[type="submit"]:hover {
+.modal-dialog form input[id="login"]:hover {
     background: #00b5a9;
     border-color: transparent;
     color: #ffffff;
