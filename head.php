@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["Username"])) {
+    header("Location: index.php");
+    exit();
+}
+?>
 <style>
 
     .navbar-default {
@@ -82,13 +89,21 @@
     </div>
     <div class="collapse navbar-collapse navbar-default" id="myNavbar">
         <ul class="nav navbar-nav navbar-left">
-            <li><a href="#">Listening</a></li>
-            <li><a href="start_speaking.php">Speaking</a></li>
-            <li><a href="mywords.php">Vocabulary</a></li>
+            <?php
+                if (isset($_SESSION["MaNH"]))
+                    echo '<li><a href="chooseLevelListen.php">Listening</a></li>
+                    <li><a href="start_speaking.php">Speaking</a></li>
+                    <li><a href="mywords.php">Vocabulary</a></li>
+                    <li><a href="home.php">MyHome</a></li>';
+                if (isset($_SESSION["Admin"]))
+                    echo '<li><a href="manage_speak.php">Manage_Speaking_Levels</a></li>
+                    <li><a href="">Manage_Listening_Levels</a></li>
+                    <li><a href="Admin.php">MyInfo</a></li>';
+            ?>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out" title="Log out"></span></a></li>
         </ul>
     </div>
 </nav>

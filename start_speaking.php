@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["MaNH"])) {
+    header("Location: index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +30,7 @@
 <?php include "head.php" ?>
 <div class="container-fluid main-container">
     <div class="row">
+
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">List speaking levels</div>

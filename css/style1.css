@@ -1,13 +1,3 @@
-/*.sidenav {
-    height: 450px;
-    width: 300px;
-    position: fixed;
-    z-index: 1;
-    margin-left: 20px;
-    margin-top: 10px;
-    opacity: 0.8;
-} */
-
 .content {
     min-height: 200px;
 }

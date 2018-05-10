@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="css/style1.css">
 	<link rel="stylesheet" href="css/stylePlayer.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/chooseLesson.css">
+	<link rel="stylesheet" href="css/chooseMode.css">
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,7 +60,7 @@
 						
 						<br />
 						<input id="submitLesson" type="submit" value="Choose this mode!" />
-						<input name="inputLevel" id="inputLevel" type="text" value="<?php echo $level ?>" />
+						<input hidden name="inputLevel" id="inputLevel" type="text" value="<?php echo $level ?>" />
 					</form>
 				</div>
 			</div>
