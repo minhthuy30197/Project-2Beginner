@@ -2,15 +2,9 @@
 
 <?php
 	$level = -1;
-	if (isset( $_POST['levelListen'] )) {
-		$level = $_POST['levelListen'];
+	if (isset( $_GET['levelListen'] )) {
+		$level = $_GET['levelListen'];
 	}
-	
-	$connect = mysqli_connect( "localhost", "root", "" ) 
-				or die( "Khong ket noi duoc mysql" );
-	mysqli_query( $connect, "set name 'utf-8'" );
-	mysqli_select_db( $connect, "hoctienganh" );
-	mysqli_set_charset( $connect, "utf8" );
 ?>
 <html lang="en">
 <head>
@@ -55,56 +49,18 @@
 			</div>
 			
 			<div class="right col-md-9">
-				<div class="list-lesson">
-					<table>
-						<tr>
-							<th>Index </th>
-							<th>Lesson</th>
-						</tr>
-						<?php
-							$result = mysqli_query( $connect, "select * from bainghe where Muc='".$level."'");
-							if ( mysqli_num_rows( $result ) > 0 ) {
-								$i = 1;
-								while ( $row = mysqli_fetch_array ( $result ) ) {
-									echo "<tr>";
-									echo "<td>".$i."</td>";
-									echo "<td>".$row['TieuDe']."</row>";
-									echo "</tr>";
-									
-									$i++;
-								}
-							}
-						?>
-					</table>
-				</div>
 				<p id="guide">Let's choose listen mode and lesson!
 				<div >
-					<form id="formChooseLesson" action="" method="post" onsubmit="editAction()">
+					<form id="formChooseLesson" action="" method="get" onsubmit="editAction()">
 						<p>Choose listen mode: </p>
-						<select id="choose-mode" name="choose-mode">
+						<select id="choose-mode" name="mode">
 							<option value="Mode1" selected="selected">Mode 1 (Default): Fill blanks</option>
 							<option value="Mode2">Mode 2: Write what you hear</option>
 						</select>
 						
 						<br />
-						<p>Choose lesson: </p>
-						<select id="choose-lesson" name="choose-lesson">
-						<?php
-							$result = mysqli_query( $connect, "select * from bainghe where Muc='".$level."'");
-							if ( mysqli_num_rows( $result ) > 0 ) {
-								$i = 1;
-								while ( $row = mysqli_fetch_array ( $result ) ) {
-									echo "<option value=\"".$row['LinkAudio']."\">";
-									echo $row['TieuDe'];
-									echo "</option>";
-								}
-							}
-							mysqli_close($connect);
-						?>
-						</select>
-						
-						<br />
-						<input id="submitLesson" type="submit" value="Choose this lesson!" >
+						<input id="submitLesson" type="submit" value="Choose this mode!" />
+						<input name="inputLevel" id="inputLevel" type="text" value="<?php echo $level ?>" />
 					</form>
 				</div>
 			</div>
@@ -113,6 +69,20 @@
 			<?php include "footer.php"; ?>
 		</div> 
 	</div>
-	<script type="text/javascript" src="js/chooseLesson.js"></script>
+	<script type="text/javascript" >
+		var selectMode = document.getElementById('choose-mode');
+		var selectForm = document.getElementById('formChooseLesson');
+
+		/*
+		 * Funtion xac dinh action cua form dua theo mode
+		 */
+		function editAction() {
+			if (selectMode.value == "Mode1") {
+				selectForm.action = "listenMode1.php";
+			} else {
+				selectForm.action = "listenMode2.php";
+			}		
+		}
+	</script>
 </body>
 </html>
