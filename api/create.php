@@ -1,6 +1,11 @@
+
 <?php
 require 'db_config.php';
-
+session_start();
+if (!isset($_SESSION["Admin"])) {
+    header("Location: index.php");
+    exit();
+}
 $TieuDe = $_POST["TieuDe"];
 $Transcript = $_POST["Transcript"];
 $TieuChuan = $_POST["TieuChuan"];

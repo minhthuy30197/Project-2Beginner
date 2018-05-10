@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION["Admin"])) {
+    header("Location: index.php");
+    exit();
+}
 require 'db_config.php';
 
 
