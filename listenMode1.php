@@ -32,7 +32,14 @@
 		</div>
 		<div class="row content">
 			<div class="left col-md-3">
-				<!-- Lo trinh hoc -->
+				 <div class="panel panel-default">
+                <div class="panel-heading">List listening levels</div>
+                <div class="panel-body">
+                    <div class="list-group list-group-flush" id="list-level">
+
+                    </div>
+                </div>
+            </div>
 			</div>
 			
 			<div class="right col-md-9">
@@ -40,13 +47,18 @@
 				
 				<br /><br />
 				<div class="exercise">
-					<p class="guide">Let fill the blanks:</p><br />
-					<div class="fillBlanks">
-						<p id="paragraph" class="transcript" readonly="readonly"></p>
-					</div>
-					<div class="wrapper">
-						<button type="button" class="submitBtn" onclick="checkWords()"> Submit</button>
-					</div>
+					<form action="showResult.php" method="post">
+						<p class="guide">Let fill the blanks:</p><br />
+						<div class="fillBlanks">
+							<p id="paragraph" class="transcript" readonly="readonly"></p>
+						</div>
+						<div class="wrapper">
+							<input type="submit" class="submitBtn" value="Submit" onclick="checkWords()" />
+						</div>
+						
+						<input id="totalWords" name="total-words" type="text" value="" />
+						<input id="listenResult" name="listen-result" type="text" value="" />	
+					</form>
 				</div>
 			</div>
 		</div>
@@ -54,10 +66,9 @@
 			<?php include "footer.php"; ?>
 		</div> 
 	</div>
-		<?php
-		$level = "1";
-		$fileName = "Test.mp3";
-		$transcriptPath = "Audio/Level" . $level . "/" . substr($fileName, 0, strlen($fileName) - 3) . "txt";
+	<?php
+		$audioPath = $_POST['choose-lesson'];
+		$transcriptPath = substr($audioPath, 0, strlen($audioPath) - 3) . "txt";
 		$transcript = "";
 		
 		if ($file = fopen($transcriptPath, "r"))
@@ -68,8 +79,7 @@
 	?>
 	
 	<script type="text/javascript"> 
-		var level = "<?php echo $level ?>";
-		var fileName = "<?php echo $fileName ?>";
+		var audioPath = "<?php echo $audioPath ?>";
 		var transcript = "<?php echo $transcript ?>";
 	</script>
 

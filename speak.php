@@ -43,7 +43,7 @@
                         </div>
                         <p>Let practice with this exercise. Try your best.</p>
                         <div id="speaker">
-                            <button id="start_listen" onclick="start_listen()"><img src="Image/audio.png"></button>
+                            <button id="start_listen" onclick="start_listen($('#nd').text())"><img src="Image/audio.png"></button>
                         </div>
                         <div id="ndcandoc">
                             <p id="nd"><p>
@@ -84,8 +84,7 @@
                                 </p>
                             </div>
                             <div id="div_start">
-                                <button id="start_button" onclick="startButton(event)"><img id="start_img"
-                                                                                            src="Image/mic.png">
+                                <button id="start_button" onclick="startButton(event)"><img id="start_img" src="Image/mic.png">
                                 </button>
                             </div>
                             <div id="results">
@@ -125,6 +124,25 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="ModalWord" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <span class="modal-title" id="word"></span>
+                <img src="Image/audio1.png" alt="" onclick="start_listen($('#word').text())" id="listenword">
+            </div>
+            <div class="modal-body">
+                <p id="meaning"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="saveWord" onclick="saveWord($('#word').text())">Save as my words</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 
@@ -132,6 +150,22 @@
     window.onload = function () {
         getListLevels();
     }
+    $(document).contextmenu(function() {
+        return false;
+    });
+
+    $("body").mousedown(function(event) {
+        if(event.which == 3){
+            var s = window.getSelection();
+            s.modify('extend','backward','word');
+            var b = s.toString();
+            s.modify('extend','forward','word');
+            var a = s.toString();
+            s.modify('move','forward','character');
+            if (b == '') findWord(a);
+            else alert("If you want to search dictionary, you can't choose more than one word.");
+        }
+    });
 
     showInfo('info_start');
     var final_transcript = '';

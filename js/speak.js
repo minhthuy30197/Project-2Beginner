@@ -1,5 +1,65 @@
 var mylevel = 1;
 var mabai = 4;
+var doing = 1;
+
+function saveWord(word) {
+    console.log(word);
+    $.ajax({
+        url: 'saveword.php',
+        dataType: "json",
+        data: {"word": word},
+        type: 'post',
+        success: function (output) {
+            alert(output);
+        }
+    });
+}
+
+function findWord(word) {
+    var newword = word.toLowerCase().trim();
+    var url = "http://api.wordnik.com:80/v4/word.json/"+newword+"/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
+    console.log(url);
+    $.ajax({
+        url: url,
+        type: 'get',
+        success: function (output) {
+            if (output.length != 0) {
+                var tmp = "";
+                var mean = "";
+                for (i = 0; i < output.length; i++) {
+                    if (output[i].partOfSpeech != tmp) {
+                        tmp = output[i].partOfSpeech;
+                        mean += "<b>"+output[i].partOfSpeech+"</b><br>";
+                    }
+                    mean += "- "+output[i].text+"<br>";
+                }
+                $('#word').text(newword);
+                $('#meaning').html(mean);
+                $('#ModalWord').modal();
+            }
+            else {
+                $('#listenword').hide();
+                $('#word').text(newword);
+                $('#meaning').text('Sorry, our dictionary haven\'t updated this word.');
+                $('#saveWord').hide();
+                $('#ModalWord').modal();
+            }
+        }
+    });
+}
+
+function start_listen(content) {
+    var msg = new SpeechSynthesisUtterance();
+    var voices = speechSynthesis.getVoices();
+    msg.voice = voices[1]; // giọng người đọc
+    msg.voiceURI = 'native';
+    msg.volume = 1; // 0 đến 1
+    msg.rate = 1; // 0.1 đến 10
+    msg.pitch = 2; // 0 đến 2
+    msg.text = content;
+    msg.lang = 'en-US'
+    speechSynthesis.speak(msg);
+}
 
 function check() {
     var s1 = $("#final_span").text().toLowerCase()
@@ -53,7 +113,7 @@ function getListLevels() {
             console.log(output.type);
             var arr = output.levels;
             var count = output.count;
-            var doing = output.levelspeak;
+            doing = output.levelspeak;
             for (i = 1; i <= count; i++) {
                 if (i == doing)
                     $('#list-level').append('<a href="speak.php?level=' + i + '" class="list-group-item list-group-item-action">\n' +

@@ -40,13 +40,18 @@
 				
 				<br /><br />
 				<div class="exercise">
-					<p class="guide">Write the setences you hear:</p>
-					<div class="write-sentences">
-						<textarea id="textarea" cols="100" rows="3" class="sentences-input"></textarea>
-					</div>
-					<div class="wrapper">
-						<button type="button" class="submitBtn" onclick="checkSentences()"> Submit</button>
-					</div>
+					<form action="showResult.php" method="post" onsubmit="checkSentences()">
+						<p class="guide">Write the setences you hear:</p>
+						<div class="write-sentences">
+							<textarea id="textarea" cols="100" rows="3" class="sentences-input"></textarea>
+						</div>
+						<div class="wrapper">
+							<input type="submit" class="submitBtn" value="Submit" />
+						</div>
+						
+						<input id="totalWords" name="total-words" type="text" value="" />
+						<input id="listenResult" name="listen-result" type="text" value="" />	
+					</form>
 				</div>
 			</div>
 		</div>
@@ -56,9 +61,8 @@
 	</div>
 	
 	<?php
-		$level = "1";
-		$fileName = "Test1.mp3";
-		$transcriptPath = "Audio/Level" . $level . "/" . substr($fileName, 0, strlen($fileName) - 3) . "txt";
+		$audioPath = $_POST['choose-lesson'];
+		$transcriptPath = substr($audioPath, 0, strlen($audioPath) - 3) . "txt";
 		$transcript = "";
 		
 		if ($file = fopen($transcriptPath, "r"))
@@ -68,10 +72,9 @@
 		}
 	?>
 	
-	<script type="text/javascript">
-		var level = "<?php echo $level ?>";
-		var fileName = `<?php echo $fileName ?>`;
-		var transcript = `<?php echo $transcript ?>`;
+	<script type="text/javascript"> 
+		var audioPath = "<?php echo $audioPath ?>";
+		var transcript = "<?php echo $transcript ?>";
 	</script>
 
 	<script type="text/javascript" src="js/player.js"></script>
