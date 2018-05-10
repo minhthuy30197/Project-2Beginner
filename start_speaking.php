@@ -30,8 +30,7 @@ if (!isset($_SESSION["MaNH"])) {
 <?php include "head.php" ?>
 <div class="container-fluid main-container">
     <div class="row">
-
-        <div class="col-md-3">
+        <div class="col-sm-3">
             <div class="panel panel-default">
                 <div class="panel-heading">List speaking levels</div>
                 <div class="panel-body">
@@ -58,7 +57,6 @@ if (!isset($_SESSION["MaNH"])) {
         <?php include "footer.php" ?>
     </div>
 </div>
-
 </body>
 </html>
 
@@ -68,6 +66,6 @@ if (!isset($_SESSION["MaNH"])) {
     }
 
     function goto() {
-        window.location.href = "speak?level="+doing;
+        window.location.href = "speak?level=" + doing;
     }
 </script>

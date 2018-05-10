@@ -15,7 +15,6 @@ if (!isset($_SESSION["Admin"])) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/md5.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="js/twbsPagination.min.js"></script>
     <script src="js/validator.min.js" type="text/javascript"></script>
