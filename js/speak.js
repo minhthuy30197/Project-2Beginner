@@ -136,7 +136,7 @@ function getListLevels() {
 }
 
 function getContent1() {
-    $('.content').replaceWith('<div class="panel-body content">' +
+    $('.content').replaceWith('<div class="content">' +
         '<table><tr>' +
         '<td><img src="Image/sorry.gif" alt="">' +
         '</td>' +

@@ -62,6 +62,6 @@
     }
 
     function goto() {
-        window.location.href = "chooseLesson.php?level="+doing;
+        window.location.href = "chooseMode.php?level="+doing;
     }
 </script>
