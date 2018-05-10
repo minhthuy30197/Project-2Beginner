@@ -96,8 +96,8 @@ if (!isset($_SESSION["Username"])) {
                     <li><a href="mywords.php">Vocabulary</a></li>
                     <li><a href="home.php">MyHome</a></li>';
                 if (isset($_SESSION["Admin"]))
-                    echo '<li><a href="#">Manage_Speaking_Levels</a></li>
-                    <li><a href="#">Manage_Listening_Levels</a></li>
+                    echo '<li><a href="manage_speak.php">Manage_Speaking_Levels</a></li>
+                    <li><a href="">Manage_Listening_Levels</a></li>
                     <li><a href="Admin.php">MyInfo</a></li>';
             ?>
 
