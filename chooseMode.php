@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <?php
 $level = -1;
 if (isset($_GET['level'])) {
@@ -33,6 +34,7 @@ if (isset($_GET['level'])) {
                 <div class="panel-heading">List speaking levels</div>
                 <div class="panel-body">
                     <div class="list-group list-group-flush" id="list-level">
+					
                     </div>
                 </div>
             </div>
@@ -83,5 +85,3 @@ if (isset($_GET['level'])) {
 </script>
 </body>
 </html>
-
-

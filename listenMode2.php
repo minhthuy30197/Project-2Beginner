@@ -1,5 +1,28 @@
 <!DOCTYPE html>
 
+<?php
+	$level = $_GET['inputLevel'];
+
+	$connect = mysqli_connect( "localhost", "root", "" )
+				or die( "Khong ket noi duoc mysql" );
+	mysqli_query( $connect, "set name 'utf-8'" );
+	mysqli_select_db( $connect, "hoctienganh" );
+	mysqli_set_charset( $connect, "utf8" );
+
+	$sql = "select * from bainghe where Muc='" . $level . "'";
+	$result = mysqli_query($connect, $sql);
+
+	if (mysqli_num_rows ($result) > 0 ) {
+		$row = mysqli_fetch_array($result);
+
+		$audioName = $row['TieuDe'];
+		$audioLink = $row['LinkAudio'];
+		$transcript = $row['Transcript'];
+		$standard = $row['TieuChuan'];
+		$hiddenWords = $row['HiddenWords'];
+	}
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -44,8 +67,10 @@
                             <div class="wrapper">
                                 <input type="submit" class="submitBtn" value="Submit"/>
                             </div>
-                            <input id="totalWords" name="total-words" type="text" value=""/>
-                            <input id="listenResult" name="listen-result" type="text" value=""/>
+                            <input hidden id="totalWords" name="total-words" type="text" value=""/>
+                            <input hidden id="listenResult" name="listen-result" type="text" value=""/>
+							<input hidden id="standardPass" name="standard-pass" type="text" value="<?php echo $standard; ?>" />
+							<input hidden id="levelForNext" name="level-next" type="text" value="<?php echo $level; ?>" />
                         </form>
                     </div>
                 </div>
@@ -57,27 +82,14 @@
     </div>
 </div>
 
-<?php
-$audioPath = $_POST['choose-lesson'];
-$transcriptPath = substr($audioPath, 0, strlen($audioPath) - 3) . "txt";
-$transcript = "";
+	<script type="text/javascript">
+		var audioLink = "<?php echo $audioLink ?>";
+		var transcript = "<?php echo $transcript ?>";
+		var audioName = "<?php echo $audioName ?>";
+	</script>
 
-if ($file = fopen($transcriptPath, "r")) {
-    $transcript .= fread($file, filesize($transcriptPath));
-    fclose($file);
-}
-?>
 
-<script type="text/javascript">
-    window.onload = function () {
-        getListLevels();
-    }
-
-    var audioPath = "<?php echo $audioPath ?>";
-    var transcript = "<?php echo $transcript ?>";
-</script>
-
-<script type="text/javascript" src="js/player.js"></script>
-<script type="text/javascript" src="js/listenMode2.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
+	<script type="text/javascript" src="js/listenMode2.js"></script>
 </body>
 </html>
