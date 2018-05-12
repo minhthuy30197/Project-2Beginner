@@ -51,6 +51,9 @@ else {
             margin-left: auto;
             margin-right: auto;
         }
+        .well {
+            opacity: 0.7;
+        }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -63,6 +66,10 @@ else {
                 <img src="Image/newmembers.png" alt="">
                 <p class="text-center">Congratulations. You have officially become a learner at 2Beginner.<br>
                     Wish you have a good time when learning at our website.<br>Please login to continue.</p>
+            </div>
+            <br>
+            <div class="text-center">
+                <a href="index.php" class="btn btn-success">Log in</a>
             </div>
         </div>
     </div>

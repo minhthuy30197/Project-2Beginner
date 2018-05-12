@@ -2,14 +2,8 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-
-if (!isset($_SESSION["Username"])) {
-    header("Location: index.php");
-    exit();
-}
 ?>
 <style>
-
     .navbar-default {
         background-color: #555555;
         border-color: #555555;
@@ -65,10 +59,10 @@ if (!isset($_SESSION["Username"])) {
         width: 100%;
         z-index: 9999 !important;
     }
+
     .affix + .main-container {
         padding-top: 80px;
     }
-
 </style>
 
 <div class="container-fluid">
@@ -93,20 +87,27 @@ if (!isset($_SESSION["Username"])) {
     <div class="collapse navbar-collapse navbar-default" id="myNavbar">
         <ul class="nav navbar-nav navbar-left">
             <?php
-                if (isset($_SESSION["MaNH"]))
-                    echo '<li><a href="chooseLevelListen.php">Listening</a></li>
+            if (isset($_SESSION["MaNH"])) {
+                echo '<li><a href="chooseLevelListen.php">Listening</a></li>
                     <li><a href="start_speaking.php">Speaking</a></li>
                     <li><a href="mywords.php">Vocabulary</a></li>
                     <li><a href="home.php">MyHome</a></li>';
-                if (isset($_SESSION["Admin"]))
+            } else {
+                if (isset($_SESSION["Admin"])) {
                     echo '<li><a href="manage_speak.php">Manage_Speaking_Levels</a></li>
                     <li><a href="manage_listen.php">Manage_Listening_Levels</a></li>
                     <li><a href="Admin.php">MyInfo</a></li>';
+                }
+            }
             ?>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out" title="Log out"></span></a></li>
+            <?php
+                if (isset($_SESSION["Username"])) {
+                    echo '<li><a href="logout.php"><span class="glyphicon glyphicon-log-out" title="Log out"></span></a></li>';
+                }
+            ?>
         </ul>
     </div>
 </nav>

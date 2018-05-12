@@ -48,7 +48,28 @@ function sign() {
 }
 
 function openreset() {
-    if ($('#email1').val() == '') alert("Please input email to reset password!")
+    var email = $('#email1').val();
+    if (email == '') alert("Please input email to reset password!")
+    else {
+        if (ValidateEmail(email) == true) {
+            $.ajax({
+                url: 'resetpwd.php',
+                dataType: "json",
+                data: {"email": email},
+                type: 'post',
+                success: function (output) {
+                    if (output == "success") {
+                        alert("We will send you a email. Please click the link in it to reset your password!");
+                        $('#email1').val('');
+                        $('#password1').val('');
+                    }
+                    else {
+                        alert(output);
+                    }
+                }
+            });
+        }
+    }
 }
 
 window.onload = function () {
@@ -77,9 +98,8 @@ function regis() {
                 data: {"name": name, "email": email, "password": password},
                 type: 'post',
                 success: function (output) {
-                    console.log(output);
                     if (output == "success") {
-                        alert("Successfully!\nWe will send to you a email. Please confirm to finish registration. Thank you!");
+                        alert("Successfully!\nWe will send you a email. Please confirm to finish registration. Thank you!");
                         $('#email').val('');
                         $('#name').val('');
                         $('#password').val('');
