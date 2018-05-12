@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <?php
 session_start();
+if (!isset($_SESSION["MaNH"])) {
+    header("Location: index.php");
+    exit();
+}
 if (!isset($_POST['Submit'])) {
     header("Location: chooseLevelListen.php");
     exit();

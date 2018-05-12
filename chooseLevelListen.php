@@ -1,5 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION["MaNH"])) {
+    header("Location: index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -84,6 +90,8 @@
         <?php include "footer.php"; ?>
     </div>
 </div>
+
+<?php include "ModalWord.php"?>
 </body>
 </html>
 
@@ -95,4 +103,21 @@
     function goto() {
         window.location.href = "chooseMode.php?level=" + doing;
     }
+
+    $(document).contextmenu(function () {
+        return false;
+    });
+
+    $("body").mousedown(function (event) {
+        if (event.which == 3) {
+            var s = window.getSelection();
+            s.modify('extend', 'backward', 'word');
+            var b = s.toString();
+            s.modify('extend', 'forward', 'word');
+            var a = s.toString();
+            s.modify('move', 'forward', 'character');
+            if (b == '') findWord(a);
+            else alert("If you want to search dictionary, you can't choose more than one word.");
+        }
+    });
 </script>

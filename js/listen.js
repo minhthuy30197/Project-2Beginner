@@ -1,5 +1,4 @@
-var mylevel = 1;
-var mabai = 1;
+var level = 1;
 var doing = 1;
 
 function saveWord(word) {
@@ -17,7 +16,7 @@ function saveWord(word) {
 
 function findWord(word) {
     var newword = word.toLowerCase().trim();
-    var url = "http://api.wordnik.com:80/v4/word.json/"+newword+"/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
+    var url = "http://api.wordnik.com:80/v4/word.json/" + newword + "/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
     console.log(url);
     $.ajax({
         url: url,
@@ -29,9 +28,9 @@ function findWord(word) {
                 for (i = 0; i < output.length; i++) {
                     if (output[i].partOfSpeech != tmp) {
                         tmp = output[i].partOfSpeech;
-                        mean += "<b>"+output[i].partOfSpeech+"</b><br>";
+                        mean += "<b>" + output[i].partOfSpeech + "</b><br>";
                     }
-                    mean += "- "+output[i].text+"<br>";
+                    mean += "- " + output[i].text + "<br>";
                 }
                 $('#word').text(newword);
                 $('#meaning').html(mean);
@@ -62,7 +61,7 @@ function start_listen(content) {
 }
 
 function getListLevels() {
-    var level = getUrlParameter('level');
+    level = getUrlParameter('level');
     $.ajax({
         url: "inilisten.php",
         dataType: "json",
@@ -86,9 +85,8 @@ function getListLevels() {
                         '                        </a>');
             }
             if (output.type == 1) getContent1();
-            else if (output.type == 2) getContent2(level);
-            else if (output.type == 3) getContent3(level);
-            else getContent4(level);
+            else if (output.type == 2) getContent2();
+            else if (output.type == 3) getContent3();
         }
     });
 }
@@ -103,16 +101,39 @@ function getContent1() {
         '</div></td></tr></table></div>');
 }
 
-function getContent2(level) {
-
+function getContent2() {
+    $('.content').replaceWith('<div class="content"><h3>Level ' + level + '</h3><div class="alert alert-warning" role="alert">' +
+        '<img src="Image/Warning.png" style="float: left">' +
+        '<div style="font-size: larger; color: red; font-weight: bold">You just can do this exercise if you finish all of your previous levels.</div>' +
+        '</div></div>');
+    $('#announce').hide();
 }
 
-function getContent3(level) {
-
+function getContent3() {
+    $.ajax({
+        url: "inilisten.php",
+        dataType: "json",
+        data: {action: "getcontenttype3", level: level},
+        type: 'post',
+        success: function (output) {
+            $('.content').hide();
+            $('#announce').replaceWith('<div id="announce"><h3>Level ' + level + '</h3><div class="alert alert-success"><table width="100%"><tr>' +
+                '<td rowspan="2"><img src="Image/badge" class="img-responsive"></td>' +
+                '<td class="text-center" style="font-size: larger">Congrat! You have passed this level at ' + output.Time + '</td>' +
+                '</tr><tr><td>' +
+                '<div class="progress" style="width: 100%">\n' +
+                '<div class="progress-bar progress-bar-striped active" role="progressbar"\n' +
+                '  aria-valuenow="' + output.Diem + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + output.Diem + '%">\n' +
+                output.Diem + '%\n' +
+                '  </div></div></td></tr></table></div><div class="text-center"><button name="doagain" id="redo" class="btn" onclick="redo()">Redo</button></div></div>');
+        }
+    });
 }
 
-function getContent4(level) {
-
+function redo() {
+    $('.content').show();
+    $('#announce').hide();
+    $('#redo').hide();
 }
 
 var getUrlParameter = function getUrlParameter(sParam) {

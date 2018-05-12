@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-
 <?php
-$level = -1;
-if (isset($_GET['level'])) {
-    $level = $_GET['level'];
+session_start();
+if (!isset($_SESSION["MaNH"])) {
+    header("Location: index.php");
+    exit();
 }
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -103,6 +103,7 @@ if (isset($_GET['level'])) {
                         </tr>
                     </table>
                 </div>
+                <div id="announce"></div>
             </div>
         </div>
     </div>
@@ -110,18 +111,38 @@ if (isset($_GET['level'])) {
         <?php include "footer.php"; ?>
     </div>
 </div>
+
+<?php include "ModalWord.php"?>
+
 <script type="text/javascript">
     function clickMode1() {
-        window.location = "listenMode1.php?inputLevel=<?php echo $level?>";
+        window.location = "listenMode1.php?inputLevel="+level;
     }
 
     function clickMode2() {
-        window.location = "listenMode2.php?inputLevel=<?php echo $level?>";
+        window.location = "listenMode2.php?inputLevel="+level;
     }
 
     window.onload = function () {
         getListLevels();
     }
+
+    $(document).contextmenu(function () {
+        return false;
+    });
+
+    $("body").mousedown(function (event) {
+        if (event.which == 3) {
+            var s = window.getSelection();
+            s.modify('extend', 'backward', 'word');
+            var b = s.toString();
+            s.modify('extend', 'forward', 'word');
+            var a = s.toString();
+            s.modify('move', 'forward', 'character');
+            if (b == '') findWord(a);
+            else alert("If you want to search dictionary, you can't choose more than one word.");
+        }
+    });
 </script>
 </body>
 </html>
