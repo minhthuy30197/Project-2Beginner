@@ -23,7 +23,18 @@ if (!isset($_SESSION["Admin"])) {
     <script type="text/javascript" src="js/item-ajax.js"></script>
     <style>
         table {
-            background-color: white;
+            background-color: rgba(227, 227, 227, 0.5);
+            border-collapse: collapse;
+        }
+
+        table.table-bordered{
+            border:1px solid black;
+        }
+        table.table-bordered > thead > tr > th{
+            border:1px solid black;
+        }
+        table.table-bordered > tbody > tr > td{
+            border:1px solid black;
         }
 
         #pagination {
@@ -82,7 +93,7 @@ if (!isset($_SESSION["Admin"])) {
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="addItem">Create Item</h4>
+                <h4 class="modal-title" id="addItem">Add new level</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -110,7 +121,7 @@ if (!isset($_SESSION["Admin"])) {
                               required></textarea>
                     <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group">
+                <div class="form-group text-center">
                     <input type="button" id="button" value="Submit" class="btn btn-primary">
                 </div>
             </div>
@@ -124,7 +135,7 @@ if (!isset($_SESSION["Admin"])) {
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Item</h4>
+                <h4 class="modal-title" id="myModalLabel">Edit Level</h4>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="id" class="edit-id">
@@ -158,7 +169,7 @@ if (!isset($_SESSION["Admin"])) {
                               required></textarea>
                     <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group">
+                <div class="form-group text-center">
                     <button type="submit" class="btn btn-primary" onclick="change()">Submit
                     </button>
                 </div>

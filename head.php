@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 if (!isset($_SESSION["Username"])) {
     header("Location: index.php");
     exit();
@@ -8,8 +11,8 @@ if (!isset($_SESSION["Username"])) {
 <style>
 
     .navbar-default {
-        background-color: #00b5a9;
-        border-color: #E7E7E7;
+        background-color: #555555;
+        border-color: #555555;
     }
 
     .dotcom {

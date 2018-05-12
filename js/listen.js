@@ -48,6 +48,19 @@ function findWord(word) {
     });
 }
 
+function start_listen(content) {
+    var msg = new SpeechSynthesisUtterance();
+    var voices = speechSynthesis.getVoices();
+    msg.voice = voices[1]; // giọng người đọc
+    msg.voiceURI = 'native';
+    msg.volume = 1; // 0 đến 1
+    msg.rate = 1; // 0.1 đến 10
+    msg.pitch = 2; // 0 đến 2
+    msg.text = content;
+    msg.lang = 'en-US'
+    speechSynthesis.speak(msg);
+}
+
 function getListLevels() {
     var level = getUrlParameter('level');
     $.ajax({

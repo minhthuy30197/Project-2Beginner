@@ -23,6 +23,39 @@ if (isset($_GET['level'])) {
         #list-level {
             min-height: 150px;
         }
+        .card {
+            margin: 50px;
+            margin-top: 30px;
+            text-align: center;
+            border: 1px solid lightgray;
+            border-radius: 15px;
+            width: 260px;
+            background-color: whitesmoke
+            height: 200px;
+            -webkit-box-shadow: 0 0 5px 5px rgba(0, 181, 169, 0.20);
+            -moz-box-shadow: 0 0 5px 5px rgba(0, 181, 169, 0.20);
+            box-shadow: 0 0 5px 5px rgba(0, 181, 169, 0.20);
+        }
+        .card-head {
+            border-radius: 15px 15px 0px 0px;
+            background-color: #00b5a9;
+            height: 50px;
+            font-weight: bold;
+            color: white;
+            padding: 20px;
+            font-size: larger;
+        }
+        .card img {
+            margin: 0 auto;
+        }
+        table {
+            margin: 0 auto;
+        }
+        table caption {
+            text-align: center;
+            font-size: larger;
+            font-weight: bolder;
+        }
     </style>
 </head>
 <body>
@@ -30,32 +63,45 @@ if (isset($_GET['level'])) {
 <div class="container-fluid main-container">
     <div class="row">
         <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">List speaking levels</div>
-                <div class="panel-body">
-                    <div class="list-group list-group-flush" id="list-level">
-					
-                    </div>
+            <div class="listpanel">
+                <div class="title-list">List listening levels</div>
+                <div class="list-group list-group-flush" id="list-level">
+
                 </div>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="content">
-                        <p id="guide">Let's choose listen mode and lesson!</p>
-                        <form id="formChooseLesson" action="" method="get" onsubmit="editAction()">
-                            <p>Choose listen mode: </p>
-                            <select id="choose-mode" name="mode">
-                                <option value="Mode1" selected="selected">Mode 1 (Default): Fill blanks</option>
-                                <option value="Mode2">Mode 2: Write what you hear</option>
-                            </select>
-
-                            <br/>
-                            <input id="submitLesson" type="submit" value="Choose this mode!"/>
-                            <input hidden name="inputLevel" id="inputLevel" type="text" value="<?php echo $level ?>"/>
-                        </form>
-                    </div>
+            <div class="nd">
+                <div class="content">
+                    <table>
+                        <caption>Level <?php echo $level?>: Choose the mode you want to do</caption>
+                        <tr>
+                            <td>
+                                <div class="card" onclick="clickMode1()">
+                                    <div class="card-head">
+                                        1. Blank Mode
+                                    </div>
+                                    <div class="card-body">
+                                        <h4>Fill in the blanks</h4>
+                                        <img src="Image/mode1.PNG" class="img-responsive">
+                                        <br>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="card" onclick="clickMode2()">
+                                    <div class="card-head">
+                                        2. Full Mode
+                                    </div>
+                                    <div class="card-body">
+                                        <h4>Type full what you heard</h4>
+                                        <img src="Image/mode2.PNG" class="img-responsive">
+                                        <br>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -65,18 +111,12 @@ if (isset($_GET['level'])) {
     </div>
 </div>
 <script type="text/javascript">
-    var selectMode = document.getElementById('choose-mode');
-    var selectForm = document.getElementById('formChooseLesson');
+    function clickMode1() {
+        window.location = "listenMode1.php?inputLevel=<?php echo $level?>";
+    }
 
-    /*
-     * Funtion xac dinh action cua form dua theo mode
-     */
-    function editAction() {
-        if (selectMode.value == "Mode1") {
-            selectForm.action = "listenMode1.php";
-        } else {
-            selectForm.action = "listenMode2.php";
-        }
+    function clickMode2() {
+        window.location = "listenMode2.php?inputLevel=<?php echo $level?>";
     }
 
     window.onload = function () {

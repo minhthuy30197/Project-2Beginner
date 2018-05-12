@@ -9,7 +9,6 @@ table {
 
 th, td {
 	width: 100px;
-	word-wrap: no wrap;
 	text-overflow: ellipsis;
 }
 

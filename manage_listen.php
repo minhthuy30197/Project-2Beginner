@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["Admin"])) {
+    header("Location: index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +23,18 @@
     <script type="text/javascript" src="js/crud.js"></script>
     <style>
         table {
-            background-color: white;
+            background-color: rgba(227, 227, 227, 0.5);
+            border-collapse: collapse;
+        }
+
+        table.table-bordered{
+            border:1px solid black;
+        }
+        table.table-bordered > thead > tr > th{
+            border:1px solid black;
+        }
+        table.table-bordered > tbody > tr > td{
+            border:1px solid black;
         }
 
         #pagination {
@@ -82,31 +100,31 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="addItem">Create Item</h4>
+                <h4 class="modal-title" id="addItem">Create Level</h4>
             </div>
             <div class="modal-body">
-                <form data-toggle="validator" action="api/create.php" method="POST" id="FormCreate"
+                <form data-toggle="validator" action="api/create1.php" method="POST" id="FormCreate"
                       enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="control-label" for="TieuDe">Mã bài:</label>
+                        <label class="control-label" for="TieuDe">ID:</label>
                         <input type="text" id="MaBai" name="MaBai" class="form-control"
                                data-error="Nhập mã bài." required/>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="Muc">Tiêu đề:</label>
+                        <label class="control-label" for="Muc">Title:</label>
                         <input type="text" id="TieuDe" name="TieuDe" class="form-control"
                                data-error="Nhập tiêu đề." required/>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="Transcript">Mức:</label>
+                        <label class="control-label" for="Transcript">Level:</label>
                         <input type="text" id="Muc" name="Muc" class="form-control" data-error="Nhập mức."
                                required/>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="TieuChuan">LinkAudio:</label>
+                        <label class="control-label" for="TieuChuan">Link audio:</label>
                         <input type="file" id="LinkAudio" name="LinkAudio" class="form-control"
                                data-error="Nhập Link Audio." required/>
                         <div class="help-block with-errors"></div>
@@ -118,13 +136,13 @@
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="TieuChuan">Tiêu chuẩn:</label>
+                        <label class="control-label" for="TieuChuan">Standard score:</label>
                         <input type="text" id="TieuChuan" name="TieuChuan" class="form-control"
                                data-error="Nhập tiêu chuẩn." required/>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="HiddenWords">Từ ẩn:</label>
+                        <label class="control-label" for="HiddenWords">Hidden words:</label>
                         <input type="text" id="HiddenWords" name="HiddenWords" class="form-control"
                                data-error="Nhập từ ẩn." required/>
                         <div class="help-block with-errors"></div>
@@ -147,31 +165,31 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Item</h4>
+                <h4 class="modal-title" id="myModalLabel">Edit Level</h4>
             </div>
             <div class="modal-body">
-                <form data-toggle="validator" action="api/edit.php" method="post" id="FormEdit">
+                <form data-toggle="validator" action="api/edit1.php" method="post" id="FormEdit">
                     <input type="hidden" name="id" class="edit-id">
                     <div class="form-group">
-                        <label class="control-label" for="TieuDe">Mã bài:</label>
+                        <label class="control-label" for="TieuDe">ID:</label>
                         <input type="text" id="MaBai" name="MaBai" class="form-control"
                                data-error="Nhập mã bài." required/>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="Muc">Tiêu đề:</label>
+                        <label class="control-label" for="Muc">Title:</label>
                         <input type="text" id="TieuDe" name="TieuDe" class="form-control"
                                data-error="Nhập tiêu đề." required/>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="Transcript">Mức:</label>
+                        <label class="control-label" for="Transcript">Level:</label>
                         <input type="text" id="Muc" name="Muc" class="form-control" data-error="Nhập mức."
                                required/>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="TieuChuan">LinkAudio:</label>
+                        <label class="control-label" for="TieuChuan">Link audio:</label>
                         <input type="file" id="LinkAudio" name="LinkAudio" class="form-control"
                                data-error="Nhập Link Audio." required/>
                         <div class="help-block with-errors"></div>
@@ -183,13 +201,13 @@
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="TieuChuan">Tiêu chuẩn:</label>
+                        <label class="control-label" for="TieuChuan">Standard score:</label>
                         <input type="text" id="TieuChuan" name="TieuChuan" class="form-control"
                                data-error="Nhập tiêu chuẩn." required/>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="HiddenWords">Từ ẩn:</label>
+                        <label class="control-label" for="HiddenWords">Hidden words:</label>
                         <input type="text" id="HiddenWords" name="HiddenWords" class="form-control"
                                data-error="Nhập từ ẩn." required/>
                         <div class="help-block with-errors"></div>
@@ -211,13 +229,13 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Item</h4>
+                <h4 class="modal-title" id="myModalLabel">Delete Level</h4>
             </div>
             <div class="modal-body">
-                <form data-toggle="validator" action="api/delete.php" method="post" id="FormDelete">
+                <form data-toggle="validator" action="api/delete1.php" method="post" id="FormDelete">
                     <input type="hidden" name="id" class="delete-id">
                     <div class="form-group">
-                        <label class="control-label" for="TieuDe">Mã bài:</label>
+                        <label class="control-label" for="TieuDe">ID:</label>
                         <input type="text" id="MaBai" name="MaBai" class="form-control"
                                data-error="Nhập mã bài." required/>
                         <div class="help-block with-errors"></div>

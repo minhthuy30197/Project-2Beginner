@@ -24,22 +24,25 @@ if ($_POST["action"] == "getlist") {
     $rs = $mysqli->query($sql);
     $row = $rs->fetch_row();
     $level = $row[0];
-    if (!isset($_POST["level"])) $result->type = 1;
+    if (!isset($_POST["level"])) $type = 1;
     else {
         $sql = 'select MaBai from bainghe where Muc = ' . $_POST["level"];
         $rs = $mysqli->query($sql);
         $row = $rs->num_rows;
-        if ($row == 0) $result->type = 1;
+        if ($row == 0) $type = 1;
         else {
-            if ($level < $_POST["level"]) $result->type = 2;
+            if ($level < $_POST["level"]) $type = 2;
             else
-                if ($level > $_POST["level"]) $result->type = 3;
-                else $result->type = 4;
+                if ($level > $_POST["level"]) $type = 3;
+                else $type = 4;
         }
     }
-    $result->levellisten = $level;
-    $result->levels = $arr;
-    $result->count = $count;
+    $result = array(
+        "type" => $type,
+        "levellisten" => $level,
+        "levels" => $arr,
+        "count" => $count
+    );
     echo json_encode($result);
 }
 ?>

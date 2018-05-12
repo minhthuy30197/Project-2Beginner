@@ -21,6 +21,11 @@ if (!isset($_SESSION["MaNH"])) {
     <link rel="stylesheet" href="css/style4.css">
     <script src="js/line-db-php.js"></script>
     <link href="css/default.css" rel="stylesheet">
+    <style>
+        .well {
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
 <?php include "head.php" ?>
@@ -47,7 +52,7 @@ if (!isset($_SESSION["MaNH"])) {
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="panel">
+            <div class="well">
                 <div class="chartWrapper">
                     <div class="chartAreaWrapper">
                         <div class="chartAreaWrapper2">
@@ -58,7 +63,8 @@ if (!isset($_SESSION["MaNH"])) {
                 <br>
                 <br>
                 <br>
-                <br>
+            </div>
+            <div class="well">
                 <div class="chartWrapper">
                     <div class="chartAreaWrapper">
                         <div class="chartAreaWrapper2">
@@ -66,9 +72,10 @@ if (!isset($_SESSION["MaNH"])) {
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
+                <br>
             </div>
-            <br>
-            <br>
         </div>
     </div>
     <div class="row">

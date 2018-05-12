@@ -1,15 +1,10 @@
-.track-title {
-	padding: 10px 10px;
-}
-
 #trackSlider {
-	margin: 10px 0 10px 0;
+	margin: 10px;
 	width: 750px;
 }
 
 .display {
-	font-size: 20px;
-	margin-bottom: 15px;
+	font-size: 15px;
 }
 
 .current-time {
@@ -17,37 +12,32 @@
 }
 
 .duration {
+	margin-left: 10px;
 	float: right;
-}
-
-.first-part {
-	text-align: center;
-}
-
-#playBtn {
-	margin: 0 10px 10px 10px;
-	width: 70px;
-	height: 70px;
-	background: url('../Image/play.png');
-	background-size: contain;
-	background-repeat: no-repeat;
 }
 
 .second-part {
+	margin-top: 10px;
 	float: right;
-}
-
-#volume1 {
-	width: 20px;
-	float: left;
 }
 
 #volume2 {
+	margin: 10px;
 	width: 20px;
 	float: right;
 }
 
-.next-track-title {
-	float: left;
-	margin: 10px 10px 0 0;
+.title {
+	font-size: larger;
+	color: #1b6d85;
+	font-weight: bolder;
+}
+
+.player-back {
+	background-color: #efefef;
+}
+
+#playBtn {
+	margin: 10px;
+	margin-right: 20px;
 }

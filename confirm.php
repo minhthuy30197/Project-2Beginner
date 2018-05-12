@@ -24,7 +24,6 @@ else {
             exit();
         }
         else {
-            echo "hi";
             $sql = "update nguoihoc set kichhoat = 1 where MaNH = ".$manh;
             $rs = $mysqli->query($sql);
         }

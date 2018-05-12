@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION["Admin"])) {
+    header("Location: index.php");
+    exit();
+}
+require 'db_config.php';
+$sql = "select HoTen from admin where Email ='".$_SESSION["Username"]."'";
+$rs = $mysqli->query($sql);
+$row = $rs->fetch_row();
+$name = $row[0];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,17 +27,21 @@
             border: 1px groove #ddd !important;
             padding: 0 1.4em 1.4em 1.4em !important;
             margin: 0 0 1.5em 0 !important;
-            -webkit-box-shadow:  0px 0px 0px 0px #000;
-            box-shadow:  0px 0px 0px 0px #000;
+            -webkit-box-shadow: 0px 0px 0px 0px #555555;
+            box-shadow: 0px 0px 0px 0px #555555;
         }
 
         legend.scheduler-border {
             font-size: 1.2em !important;
             font-weight: bold !important;
             text-align: left !important;
-            width:auto;
-            padding:0 10px;
-            border-bottom:none;
+            width: auto;
+            padding: 0 10px;
+            border-bottom: none;
+        }
+
+        .well {
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -33,31 +49,33 @@
 <?php include "head.php" ?>
 <div class="container-fluid main-container">
     <div class="row">
-        <div class="col-sm-6 col-sm-push-3">
-            <h3 align="center"><span class="glyphicon glyphicon-book"> Chào mừng đến với trang chủ Admin !!</span></h3>
-            <br/>
-            <br/>
+        <div class="col-sm-6 col-sm-push-3 well">
             <fieldset class="scheduler-border">
-                <legend class="scheduler-border">Change your password</legend>
-                <div class="control-group">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="oldpass" type="password" class="form-control" placeholder="Old password">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="newpass" type="password" class="form-control" placeholder="New password">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="retype" type="password" class="form-control" placeholder="Retype password">
-                    </div>
-                    <br>
+                <legend class="scheduler-border">My Infomation</legend>
+                <p>Name: <?php echo $name?></p>
+                <p>Email: <?php echo $_SESSION["Username"]?></p>
+            </fieldset>
+            <h4>Change password</h4>
+            <div class="control-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="oldpass" type="password" class="form-control" placeholder="Old password">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="newpass" type="password" class="form-control" placeholder="New password">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="retype" type="password" class="form-control" placeholder="Retype password">
+                </div>
+                <br>
+                <div class="text-center">
                     <button class="btn btn-primary" onclick="changepwd()">Change</button>
                 </div>
-            </fieldset>
+            </div>
         </div>
     </div>
     <div class="row">

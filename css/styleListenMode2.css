@@ -13,3 +13,7 @@
 #listenResult {
 	visibility: hidden;
 }
+
+.modal-dialog {
+	margin: 10px auto 0px auto
+}

@@ -26,6 +26,7 @@ for (var i = 0; i < mapList.length; i++) {
 //Function phan tach doan transcript thanh editTranscriptipt (transcript thuc su) va mapList (chua cac tu)
 function sortHiddenWords(){
 	//phan chia cac tu trong hiddenWords vao mang tmpList - chua kiem tra su ton tai cua tu
+	console.log(hiddenWords)
 	var tmpList = hiddenWords.split(",");
 	
 	//tao list chua cac tu - chua sap xep theo thu tu xuat hien

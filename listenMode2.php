@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 
 <?php
-	$level = $_GET['inputLevel'];
+if (!isset($_GET['inputLevel'])) {
+    header("Location: chooseLevelListen.php");
+    exit();
+}
+$level = $_GET['inputLevel'];
+$connect = mysqli_connect("localhost", "root", "")
+or die("Khong ket noi duoc mysql");
+mysqli_query($connect, "set name 'utf-8'");
+mysqli_select_db($connect, "hoctienganh");
+mysqli_set_charset($connect, "utf8");
 
-	$connect = mysqli_connect( "localhost", "root", "" )
-				or die( "Khong ket noi duoc mysql" );
-	mysqli_query( $connect, "set name 'utf-8'" );
-	mysqli_select_db( $connect, "hoctienganh" );
-	mysqli_set_charset( $connect, "utf8" );
+$sql = "select * from bainghe where Muc='" . $level . "'";
+$result = mysqli_query($connect, $sql);
 
-	$sql = "select * from bainghe where Muc='" . $level . "'";
-	$result = mysqli_query($connect, $sql);
+if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_array($result);
 
-	if (mysqli_num_rows ($result) > 0 ) {
-		$row = mysqli_fetch_array($result);
-
-		$audioName = $row['TieuDe'];
-		$audioLink = $row['LinkAudio'];
-		$transcript = $row['Transcript'];
-		$standard = $row['TieuChuan'];
-		$hiddenWords = $row['HiddenWords'];
-	}
+    $audioName = $row['TieuDe'];
+    $audioLink = $row['LinkAudio'];
+    $transcript = $row['Transcript'];
+    $standard = $row['TieuChuan'];
+    $hiddenWords = $row['HiddenWords'];
+}
 ?>
 
 <html lang="en">
@@ -44,35 +47,35 @@
 <div class="container-fluid main-container">
     <div class="row">
         <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">List speaking levels</div>
-                <div class="panel-body">
-                    <div class="list-group list-group-flush" id="list-level">
-                    </div>
+            <div class="listpanel">
+                <div class="title-list">List listening levels</div>
+                <div class="list-group list-group-flush" id="list-level">
+
                 </div>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <?php include "player.php"; ?>
-
-                    <br/><br/>
-                    <div class="exercise">
-                        <form action="showResult.php" method="post" onsubmit="checkSentences()">
-                            <p class="guide">Write the setences you hear:</p>
-                            <div class="write-sentences">
-                                <textarea id="textarea" cols="100" rows="3" class="sentences-input"></textarea>
-                            </div>
-                            <div class="wrapper">
-                                <input type="submit" class="submitBtn" value="Submit"/>
-                            </div>
-                            <input hidden id="totalWords" name="total-words" type="text" value=""/>
-                            <input hidden id="listenResult" name="listen-result" type="text" value=""/>
-							<input hidden id="standardPass" name="standard-pass" type="text" value="<?php echo $standard; ?>" />
-							<input hidden id="levelForNext" name="level-next" type="text" value="<?php echo $level; ?>" />
-                        </form>
-                    </div>
+            <div class="nd">
+                <?php include "player.php"; ?>
+                <br/><br/>
+                <div class="exercise">
+                    <form action="showResult.php" method="post" onsubmit="checkSentences()">
+                        <p class="guide">Write the setences you hear:</p>
+                        <div class="write-sentences">
+                            <textarea id="textarea" style="width:100%" rows="5" class="sentences-input"></textarea>
+                        </div>
+                        <div class="wrapper">
+                            <a href="chooseMode.php?level=<?php echo $level?>" class="btn btn-default">Go back</a>
+                            <input type="submit" class="btn btn-primary submitBtn" name="Submit" value="Submit"/>
+                        </div>
+                        <input type="text" hidden name="transcript" value="<?php echo $transcript ?>">
+                        <input hidden id="totalWords" name="total-words" type="text" value=""/>
+                        <input hidden id="listenResult" name="listen-result" type="text" value=""/>
+                        <input hidden id="standardPass" name="standard-pass" type="text"
+                               value="<?php echo $standard; ?>"/>
+                        <input hidden id="levelForNext" name="level-next" type="text"
+                               value="<?php echo $level; ?>"/>
+                    </form>
                 </div>
             </div>
         </div>
@@ -82,14 +85,39 @@
     </div>
 </div>
 
-	<script type="text/javascript">
-		var audioLink = "<?php echo $audioLink ?>";
-		var transcript = "<?php echo $transcript ?>";
-		var audioName = "<?php echo $audioName ?>";
-	</script>
+<?php include "ModalWord.php" ?>
 
+<script type="text/javascript">
+    var audioLink = "<?php echo $audioLink ?>";
+    var transcript = "<?php echo $transcript ?>";
+    var audioName = "<?php echo $audioName ?>";
+</script>
 
-	<script type="text/javascript" src="js/player.js"></script>
-	<script type="text/javascript" src="js/listenMode2.js"></script>
+<script>
+    window.onload = function () {
+        getListLevels();
+        $('#volumeSlider').hide();
+    }
+
+    $(document).contextmenu(function () {
+        return false;
+    });
+
+    $("body").mousedown(function (event) {
+        if (event.which == 3) {
+            var s = window.getSelection();
+            s.modify('extend', 'backward', 'word');
+            var b = s.toString();
+            s.modify('extend', 'forward', 'word');
+            var a = s.toString();
+            s.modify('move', 'forward', 'character');
+            if (b == '') findWord(a);
+            else alert("If you want to search dictionary, you can't choose more than one word.");
+        }
+    });
+</script>
+
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/listenMode2.js"></script>
 </body>
 </html>

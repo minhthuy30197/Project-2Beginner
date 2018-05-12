@@ -31,78 +31,81 @@ if (!isset($_SESSION["MaNH"])) {
 <div class="container-fluid main-container">
     <div class="row">
         <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">List speaking levels</div>
-                <div class="panel-body">
-                    <div class="list-group list-group-flush" id="list-level">
+            <div class="listpanel">
+                <div class="title-list">List speaking levels</div>
+                <div class="list-group list-group-flush" id="list-level">
 
-                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="content">
-                        <div id="ndhoc">
-                            <p id="title">Content</p>
-                            <p id="needtolearn"></p>
+            <div class="nd">
+                <div class="content">
+                    <div id="ndhoc">
+                        <p id="title">Content</p>
+                        <p id="needtolearn"></p>
+                    </div>
+                    <p>Let practice with this exercise. Try your best.</p>
+                    <div id="speaker">
+                        <button id="start_listen" onclick="start_listen($('#nd').text())"><img src="Image/audio.png">
+                        </button>
+                    </div>
+                    <div id="ndcandoc">
+                        <p id="nd">
+                        <p>
+                    </div>
+                    <br>
+                    <div id="ktra">
+                        <div id="info">
+                            <p id="info_start">
+                                Click on the microphone icon and begin speaking for as long as you like.
+                            </p>
+                            <p id="info_speak_now" style="display:none">
+                                Speak now.
+                            </p>
+                            <p id="info_no_speech" style="display:none">
+                                No speech was detected. You may need to adjust your
+                                <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">microphone
+                                    settings</a>.
+                            </p>
+                            <p id="info_no_microphone" style="display:none">
+                                No microphone was found. Ensure that a microphone is installed and that
+                                <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                                    microphone settings</a> are configured correctly.
+                            </p>
+                            <p id="info_allow" style="display:none">
+                                Click the "Allow" button above to enable your microphone.
+                            </p>
+                            <p id="info_denied" style="display:none">
+                                Permission to use microphone was denied.
+                            </p>
+                            <p id="info_blocked" style="display:none">
+                                Permission to use microphone is blocked. To change, go to
+                                chrome://settings/contentExceptions#media-stream
+                            </p>
+                            <p id="info_upgrade" style="display:none">
+                                Web Speech API is not supported by this browser. Upgrade to <a href=
+                                                                                               "//www.google.com/chrome">Chrome</a>
+                                version 25 or later.
+                            </p>
                         </div>
-                        <p>Let practice with this exercise. Try your best.</p>
-                        <div id="speaker">
-                            <button id="start_listen" onclick="start_listen($('#nd').text())"><img src="Image/audio.png"></button>
+                        <div id="div_start">
+                            <button id="start_button" onclick="startButton(event)"><img id="start_img"
+                                                                                        src="Image/mic.png">
+                            </button>
                         </div>
-                        <div id="ndcandoc">
-                            <p id="nd"><p>
+                        <div id="results">
+                            <span class="final" id="final_span"></span>
+                            <span class="interim" id="interim_span"></span>
                         </div>
                         <br>
-                        <div id="ktra">
-                            <div id="info">
-                                <p id="info_start">
-                                    Click on the microphone icon and begin speaking for as long as you like.
-                                </p>
-                                <p id="info_speak_now" style="display:none">
-                                    Speak now.
-                                </p>
-                                <p id="info_no_speech" style="display:none">
-                                    No speech was detected. You may need to adjust your
-                                    <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">microphone
-                                        settings</a>.
-                                </p>
-                                <p id="info_no_microphone" style="display:none">
-                                    No microphone was found. Ensure that a microphone is installed and that
-                                    <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-                                        microphone settings</a> are configured correctly.
-                                </p>
-                                <p id="info_allow" style="display:none">
-                                    Click the "Allow" button above to enable your microphone.
-                                </p>
-                                <p id="info_denied" style="display:none">
-                                    Permission to use microphone was denied.
-                                </p>
-                                <p id="info_blocked" style="display:none">
-                                    Permission to use microphone is blocked. To change, go to
-                                    chrome://settings/contentExceptions#media-stream
-                                </p>
-                                <p id="info_upgrade" style="display:none">
-                                    Web Speech API is not supported by this browser. Upgrade to <a href=
-                                                                                                   "//www.google.com/chrome">Chrome</a>
-                                    version 25 or later.
-                                </p>
-                            </div>
-                            <div id="div_start">
-                                <button id="start_button" onclick="startButton(event)"><img id="start_img" src="Image/mic.png">
-                                </button>
-                            </div>
-                            <div id="results">
-                                <span class="final" id="final_span"></span>
-                                <span class="interim" id="interim_span"></span>
-                            </div>
-                            <br>
-                            <button name="checkspeak" class="btn btn-primary" onclick="check()">Check</button>
+                        <div class="btncontroll">
+                            <button name="checkspeak" id="check" class="btn btn-primary" onclick="check()">Check your
+                                test
+                            </button>
                         </div>
-                        <div id="announce">
-                        </div>
+                    </div>
+                    <div id="announce">
                     </div>
                 </div>
             </div>
@@ -132,24 +135,7 @@ if (!isset($_SESSION["MaNH"])) {
     </div>
 </div>
 
-<div class="modal fade" id="ModalWord" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <span class="modal-title" id="word"></span>
-                <img src="Image/audio1.png" alt="" onclick="start_listen($('#word').text())" id="listenword">
-            </div>
-            <div class="modal-body">
-                <p id="meaning"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="saveWord" onclick="saveWord($('#word').text())">Save as my words</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+<?php include "ModalWord.php"?>
 </body>
 </html>
 
@@ -157,18 +143,18 @@ if (!isset($_SESSION["MaNH"])) {
     window.onload = function () {
         getListLevels();
     }
-    $(document).contextmenu(function() {
+    $(document).contextmenu(function () {
         return false;
     });
 
-    $("body").mousedown(function(event) {
-        if(event.which == 3){
+    $("body").mousedown(function (event) {
+        if (event.which == 3) {
             var s = window.getSelection();
-            s.modify('extend','backward','word');
+            s.modify('extend', 'backward', 'word');
             var b = s.toString();
-            s.modify('extend','forward','word');
+            s.modify('extend', 'forward', 'word');
             var a = s.toString();
-            s.modify('move','forward','character');
+            s.modify('move', 'forward', 'character');
             if (b == '') findWord(a);
             else alert("If you want to search dictionary, you can't choose more than one word.");
         }

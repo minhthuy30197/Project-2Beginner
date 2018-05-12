@@ -1,1 +1,9 @@
-fsvedd
+.rs {
+    font-size: xx-large;
+    font-weight: bolder;
+    font-family: "Courier New";
+}
+
+img  {
+    margin: 0 auto;
+}

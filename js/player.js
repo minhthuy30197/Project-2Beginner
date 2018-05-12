@@ -13,9 +13,8 @@ loadTrack();
 setInterval(updateTrackSlider, 1000);
 
 function loadTrack(){
-	track.src = audioPath;
+	track.src = audioLink;
 	track.addEventListener('loadedmetadata', showDuration);											//su dung event loadedmetadata de su dung duoc audio.duration
-	trackTitle.textContent = audioPath.substr(13, audioPath.length);								//loai bo phan "Audio/LevelX/"
 
 	//nextTrackTitle.innerHTML = "<b>Next Track: </b>" + tracks[currentTrack + 1 % tracks.length];	//lay ten cua track tiep theo cho nextTrackTitle
 	track.volume = volumeSlider.value;																//gia tri cua volume lay tu 0.0 (silent) den 1.0 (max)
@@ -58,15 +57,13 @@ function convertTime (seconds) {
 function playOrPause() {
 
 	if(track.paused){
-		track.play();	
-		playBtn.style.background = "url('Image/pause.png')";
-		playBtn.style.backgroundSize = "contain";
+		track.play();
+        $('#playBtn').attr('src','Image/pause1.png');
 	}
 	else
 	{
 		track.pause();
-		playBtn.style.background = "url('Image/play.png')";
-		playBtn.style.backgroundSize = "contain";
+        $('#playBtn').attr('src','Image/play1.png');
 	}
 }
 
@@ -77,4 +74,9 @@ function seekTrack () {
 
 function adjustVolume () {
 	track.volume = volumeSlider.value;
+}
+
+function showVolume() {
+	if ($('#volumeSlider').is(":visible")) $('#volumeSlider').hide();
+	else $('#volumeSlider').show();
 }
