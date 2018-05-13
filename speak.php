@@ -23,6 +23,11 @@ if (!isset($_SESSION["MaNH"])) {
             max-height: 300px;
             overflow: auto;
         }
+        #title {
+            font-size: larger;
+            font-weight: bolder;
+            color: #1b6d85;
+        }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -43,7 +48,8 @@ if (!isset($_SESSION["MaNH"])) {
                 <div class="content">
                     <div id="ndhoc">
                         <p id="title">Content</p>
-                        <p id="needtolearn"></p>
+                        <br>
+                        <div id="needtolearn"></div>
                     </div>
                     <p>Let practice with this exercise. Try your best.</p>
                     <div id="speaker">
@@ -51,8 +57,7 @@ if (!isset($_SESSION["MaNH"])) {
                         </button>
                     </div>
                     <div id="ndcandoc">
-                        <p id="nd">
-                        <p>
+                        <p id="nd"><p>
                     </div>
                     <br>
                     <div id="ktra">

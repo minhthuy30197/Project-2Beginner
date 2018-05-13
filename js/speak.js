@@ -17,7 +17,7 @@ function saveWord(word) {
 
 function findWord(word) {
     var newword = word.toLowerCase().trim();
-    var url = "http://api.wordnik.com:80/v4/word.json/"+newword+"/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
+    var url = "http://api.wordnik.com:80/v4/word.json/" + newword + "/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
     console.log(url);
     $.ajax({
         url: url,
@@ -29,9 +29,9 @@ function findWord(word) {
                 for (i = 0; i < output.length; i++) {
                     if (output[i].partOfSpeech != tmp) {
                         tmp = output[i].partOfSpeech;
-                        mean += "<b>"+output[i].partOfSpeech+"</b><br>";
+                        mean += "<b>" + output[i].partOfSpeech + "</b><br>";
                     }
-                    mean += "- "+output[i].text+"<br>";
+                    mean += "- " + output[i].text + "<br>";
                 }
                 $('#word').text(newword);
                 $('#meaning').html(mean);
@@ -62,44 +62,45 @@ function start_listen(content) {
 }
 
 function check() {
-    var s1 = $("#final_span").text().toLowerCase()
-    var s2 = $("#nd").text().toLowerCase()
-    s2 = s2.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, "")
-    s2 = s2.replace(/\s{2,}/g, ' ');
-    console.log(s1)
-    console.log(s2)
-    $.ajax({
-        url: "checkspeak.php",
-        dataType: "json",
-        data: {"action": "check", "s1": s1, "s2": s2, "level": mylevel, "mabai": mabai},
-        type: 'post',
-        success: function (output) {
-            console.log(output);
-            if (output.done) {
-                $('.modal-confirm .btn').css('background', '#82ce34');
-                $('.modal-confirm .icon-box').css('background', '#82ce34');
-                $('.material-icons').html('&#xE876;');
-                $('.modal-title').html('Awesome!');
-                $('#modal-btn').text('Go to next level');
-                $('#modal-mark').html(output.percent + "/100");
-                $('#modal-btn').attr("href", "speak.php?level=" + output.next);
-                $('#modal-msg').html('Congratulations! You have finished level ' + mylevel + '.');
-                //show button next + change tag in list-group if modal is closed
+    var s1 = $("#final_span").text().toLowerCase();
+    if (s1 != "") {
+        var s2 = $("#nd").text().toLowerCase();
+        s2 = s2.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, "")
+        s2 = s2.replace(/\s{2,}/g, ' ');
+        $.ajax({
+            url: "checkspeak.php",
+            dataType: "json",
+            data: {"action": "check", "s1": s1, "s2": s2, "level": mylevel, "mabai": mabai},
+            type: 'post',
+            success: function (output) {
+                console.log(output);
+                if (output.done) {
+                    $('.modal-confirm .btn').css('background', '#82ce34');
+                    $('.modal-confirm .icon-box').css('background', '#82ce34');
+                    $('.material-icons').html('&#xE876;');
+                    $('.modal-title').html('Awesome!');
+                    $('#modal-btn').text('Go to next level');
+                    $('#modal-mark').html(output.percent + "/100");
+                    $('#modal-btn').attr("href", "speak.php?level=" + output.next);
+                    $('#modal-msg').html('Congratulations! You have finished level ' + mylevel + '.');
+                    //show button next + change tag in list-group if modal is closed
+                }
+                else {
+                    $('.modal-confirm .btn').css('background', '#ef513a');
+                    $('.modal-confirm .icon-box').css('background', '#ef513a');
+                    $('.material-icons').html('&#xE5CD;');
+                    $('.modal-title').html('Sorry!');
+                    $('#modal-msg').html('Please go back and do again. Try your best.');
+                    $('#modal-btn').text('OK');
+                    $('#modal-mark').html(output.percent + "/100");
+                    $('#modal-btn').attr("href", "speak.php?level=" + output.next);
+                    //clear input
+                }
+                $('#myModal').modal('show');
             }
-            else {
-                $('.modal-confirm .btn').css('background', '#ef513a');
-                $('.modal-confirm .icon-box').css('background', '#ef513a');
-                $('.material-icons').html('&#xE5CD;');
-                $('.modal-title').html('Sorry!');
-                $('#modal-msg').html('Please go back and do again. Try your best.');
-                $('#modal-btn').text('OK');
-                $('#modal-mark').html(output.percent + "/100");
-                $('#modal-btn').attr("href", "speak.php?level=" + output.next);
-                //clear input
-            }
-            $('#myModal').modal('show');
-        }
-    });
+        });
+    }
+    else alert("You can't submit empty content.")
 }
 
 function getListLevels() {
@@ -152,8 +153,9 @@ function getContent2(level) {
         data: {action: "getcontenttype2", level: level},
         type: 'post',
         success: function (output) {
-            $('#title').text(output.TieuDe);
-            $('#needtolearn').text(output.NoiDung);
+            var title = "Level " + level + " - " + output.TieuDe;
+            $('#title').html(title);
+            $('#needtolearn').replaceWith('<div id = "needtolearn">'+output.NoiDung+'</div>');
             $('#nd').text(output.Transcript);
             $('#ktra').hide();
             $('#announce').replaceWith('<div id="announce"><div class="alert alert-warning" role="alert">' +
@@ -171,8 +173,9 @@ function getContent3(level) {
         data: {action: "getcontenttype3", level: level},
         type: 'post',
         success: function (output) {
-            $('#title').text(output.TieuDe);
-            $('#needtolearn').text(output.NoiDung);
+            var title = "Level " + level + " - " + output.TieuDe;
+            $('#title').html(title);
+            $('#needtolearn').replaceWith('<div id = "needtolearn">'+output.NoiDung+'</div>');
             $('#nd').text(output.Transcript);
             $('#ktra').hide();
             $('#announce').replaceWith('<div id="announce" class="alert alert-success"><table width="100%"><tr>' +
@@ -197,8 +200,9 @@ function getContent4(level) {
         data: {action: "getcontenttype4", level: level},
         type: 'post',
         success: function (output) {
-            $('#title').text(output.TieuDe);
-            $('#needtolearn').text(output.NoiDung);
+            var title = "Level " + level + " - " + output.TieuDe;
+            $('#title').html(title);
+            $('#needtolearn').replaceWith('<div id = "needtolearn">'+output.NoiDung+'</div>');
             $('#nd').text(output.Transcript);
             mabai = output.MaBai;
             mylevel = level;
