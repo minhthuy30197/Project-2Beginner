@@ -22,6 +22,9 @@ if (!isset($_SESSION["Admin"])) {
     <link href="css/toastr.min.css" rel="stylesheet">
     <script type="text/javascript" src="js/item-ajax.js"></script>
     <style>
+        .modal {
+            margin-top: 50px;
+        }
         table {
             background-color: rgba(227, 227, 227, 0.5);
             border-collapse: collapse;

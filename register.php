@@ -3,7 +3,7 @@ require 'db_config.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 if (isset($_POST["email"])) {
-    $sql = "insert into dangnhap (Username, Password, quyen) values ('".$_POST["email"]."','".$_POST["password"]."',2)";$rs = $mysqli->query($sql);
+    $sql = "insert into dangnhap (Username, Password, quyen) values ('".$_POST["email"]."','".$_POST["password"]."',2)";
     $rs = $mysqli->query($sql);
     if ($rs) {
         $sql = "insert into nguoihoc (HoTen,Email,DangXuatCuoi,levelspeak,levellisten,kichhoat) values ('" . $_POST["name"] . "','" . $_POST["email"] . "',null,1,1,0)";
@@ -61,6 +61,8 @@ if (isset($_POST["email"])) {
     }
     else {
         $result = "Your email must be used in our website. Try with other.\n".mysqli_error($mysqli);
+        $sql = "delete from dangnhap where Username = '".$_POST["email"]."'";
+        $rs = $mysqli->query($sql);
     }
     echo json_encode($result);
 }
